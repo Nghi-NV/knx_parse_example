@@ -1,0 +1,322 @@
+:root {
+  --bg: #0f0f12;
+  --surface: #1a1a1f;
+  --border: #2d2d35;
+  --text: #e8e8ed;
+  --text-muted: #8888a0;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --success: #22c55e;
+  --error: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.upload-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.file-label {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.file-label input[type="file"] {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.file-button:hover {
+  background: var(--accent-hover);
+}
+
+.file-name {
+  display: inline-block;
+  margin-left: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.password-row {
+  margin-bottom: 1rem;
+}
+
+.password-row label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.password-row input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+#parseBtn {
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#parseBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+#parseBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.result-section,
+.error-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.result-header h2,
+.error-section h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+#downloadBtn {
+  padding: 0.5rem 1rem;
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#downloadBtn:hover {
+  filter: brightness(1.1);
+}
+
+.status {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.view-tab {
+  padding: 0.4rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.view-tab:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.view-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.json-view {
+  margin: 0;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 60vh;
+  font-size: 0.8rem;
+  font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+  line-height: 1.5;
+}
+
+#jsonTreeView .json-node {
+  padding-left: 0;
+}
+
+#jsonTreeView .json-children {
+  padding-left: 1.25em;
+  border-left: 1px solid var(--border);
+  margin-left: 0.5em;
+}
+
+#jsonTreeView .json-line {
+  padding: 0.1em 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#jsonTreeView .json-line.json-expandable {
+  cursor: pointer;
+  user-select: none;
+}
+
+#jsonTreeView .json-line.json-expandable:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 3px;
+}
+
+#jsonTreeView .json-toggle {
+  display: inline-block;
+  width: 1em;
+  margin-right: 0.25em;
+  color: var(--text-muted);
+  font-size: 0.7em;
+}
+
+#jsonTreeView .json-key {
+  color: #7dd3fc;
+}
+
+#jsonTreeView .json-colon {
+  color: var(--text-muted);
+}
+
+#jsonTreeView .json-brace {
+  color: #fbbf24;
+}
+
+#jsonTreeView .json-bracket {
+  color: #fbbf24;
+}
+
+#jsonTreeView .json-string {
+  color: #86efac;
+}
+
+#jsonTreeView .json-number {
+  color: #fcd34d;
+}
+
+#jsonTreeView .json-bool {
+  color: #c084fc;
+}
+
+#jsonTreeView .json-null {
+  color: var(--text-muted);
+}
+
+#jsonTreeView .json-count {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+#jsonTreeView .json-node.collapsed .json-children {
+  display: none;
+}
+
+#jsonOutput {
+  margin: 0;
+  padding: 1rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+#jsonOutput.raw-view {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 60vh;
+}
+
+#errorMessage {
+  margin: 0;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  color: var(--error);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KNX Parser — Chuyển .knxproj sang JSON</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.dart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>KNX Parser</h1>
+      <p class="subtitle">Chọn file .knxproj để chuyển sang JSON (dùng thư viện knx_parse)</p>
+    </header>
+
+    <section class="upload-section">
+      <label class="file-label">
+        <input type="file" id="fileInput" accept=".knxproj">
+        <span class="file-button">Chọn file .knxproj</span>
+      </label>
+      <span class="file-name" id="fileName" aria-live="polite"></span>
+      <div class="password-row">
+        <label for="passwordInput">Mật khẩu (nếu project mã hóa):</label>
+        <input type="password" id="passwordInput" placeholder="Để trống nếu không mã hóa">
+      </div>
+      <button type="button" id="parseBtn" disabled>Parse sang JSON</button>
+    </section>
+
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-header">
+        <h2>Kết quả JSON</h2>
+        <div class="view-tabs">
+          <button type="button" class="view-tab active" data-view="tree" aria-pressed="true">Cây</button>
+          <button type="button" class="view-tab" data-view="raw" aria-pressed="false">Raw</button>
+        </div>
+        <button type="button" id="downloadBtn">Tải file JSON</button>
+      </div>
+      <div class="status" id="status"></div>
+      <div id="jsonTreeView" class="json-view"></div>
+      <pre id="jsonOutput" class="json-view raw-view" hidden></pre>
+    </section>
+
+    <section class="error-section" id="errorSection" hidden>
+      <h2>Lỗi</h2>
+      <pre id="errorMessage"></pre>
+    </section>
+  </div>
+</body>
+
+</html>
