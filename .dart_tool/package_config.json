@@ -183,7 +183,7 @@
     },
     {
       "name": "knx_parser",
-      "rootUri": "file:///Users/nghinguyen/.pub-cache/hosted/pub.dev/knx_parser-1.3.0",
+      "rootUri": "file:///Users/nghinguyen/.pub-cache/hosted/pub.dev/knx_parser-1.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },

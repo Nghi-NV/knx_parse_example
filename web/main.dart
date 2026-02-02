@@ -244,7 +244,7 @@ void main() {
     if (lastJsonString == null || lastFileName == null) return;
     final blob = Blob([lastJsonString!], 'application/json');
     final url = Url.createObjectUrlFromBlob(blob);
-    final a = AnchorElement()
+    AnchorElement()
       ..href = url
       ..download = lastFileName!
       ..click();
