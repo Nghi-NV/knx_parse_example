@@ -244,10 +244,9 @@ packages:
   knx_parser:
     dependency: "direct main"
     description:
-      name: knx_parser
-      sha256: "0b23d75ec111dda2fceea1bc3666c632142da11d63e828eb5941278b0ae32fa3"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../knx_parse"
+      relative: true
+    source: path
     version: "1.5.0"
   logging:
     dependency: transitive

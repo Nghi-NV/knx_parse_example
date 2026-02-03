@@ -244,10 +244,6 @@ void main() {
     if (lastJsonString == null || lastFileName == null) return;
     final blob = Blob([lastJsonString!], 'application/json');
     final url = Url.createObjectUrlFromBlob(blob);
-    AnchorElement()
-      ..href = url
-      ..download = lastFileName!
-      ..click();
     Url.revokeObjectUrl(url);
   });
 }
