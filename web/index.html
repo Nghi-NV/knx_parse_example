@@ -32,9 +32,17 @@
     <section class="result-section" id="resultSection" hidden>
       <div class="result-header">
         <h2>Kết quả JSON</h2>
-        <div class="view-tabs">
-          <button type="button" class="view-tab active" data-view="tree" aria-pressed="true">Cây</button>
-          <button type="button" class="view-tab" data-view="raw" aria-pressed="false">Raw</button>
+        <div class="result-controls">
+          <div class="format-tabs">
+            <span class="tab-label">Format:</span>
+            <button type="button" class="format-tab active" data-format="nested" aria-pressed="true">Nested</button>
+            <button type="button" class="format-tab" data-format="flat" aria-pressed="false">Flat</button>
+          </div>
+          <div class="view-tabs">
+            <span class="tab-label">View:</span>
+            <button type="button" class="view-tab active" data-view="tree" aria-pressed="true">Cây</button>
+            <button type="button" class="view-tab" data-view="raw" aria-pressed="false">Raw</button>
+          </div>
         </div>
         <button type="button" id="downloadBtn">Tải file JSON</button>
       </div>

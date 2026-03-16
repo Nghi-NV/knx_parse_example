@@ -206,6 +206,47 @@ header h1 {
   color: white;
 }
 
+.result-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.format-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tab-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.format-tab {
+  padding: 0.4rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.format-tab:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.format-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
 .json-view {
   margin: 0;
   padding: 1rem;

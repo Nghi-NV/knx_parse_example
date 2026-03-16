@@ -145,11 +145,33 @@ void main() {
   final status = document.getElementById('status')!;
   final downloadBtn = document.getElementById('downloadBtn')! as ButtonElement;
   final viewTabs = document.querySelectorAll('.view-tab');
+  final formatTabs = document.querySelectorAll('.format-tab');
 
   String? lastJsonString;
   String? lastFileName;
+  KnxProject? lastProject;
+  String currentFormat = 'nested';
 
   final fileNameEl = document.getElementById('fileName')!;
+
+  /// Re-render JSON output based on current format
+  void renderOutput() {
+    if (lastProject == null) return;
+    final jsonMap = currentFormat == 'flat'
+        ? lastProject!.toFlatJson()
+        : lastProject!.toJson();
+    final jsonStr = const JsonEncoder.withIndent('  ').convert(jsonMap);
+    lastJsonString = jsonStr;
+
+    final formatLabel = currentFormat == 'flat' ? 'Flat' : 'Nested';
+    status.text = '[$formatLabel] Project: ${lastProject!.projectInfo.name} — '
+        '${lastProject!.installations.length} installation(s), '
+        '${lastProject!.datapointTypes.length} datapoint type(s).';
+
+    jsonOutput.text = jsonStr;
+    jsonTreeView.children.clear();
+    jsonTreeView.append(buildJsonTree(jsonMap));
+  }
 
   fileInput.onChange.listen((_) {
     if (fileInput.files != null && fileInput.files!.isNotEmpty) {
@@ -191,19 +213,12 @@ void main() {
         }
         final parser = KnxProjectParser();
         final project = parser.parseBytes(bytes, password: password);
-        final jsonMap = project.toJson();
-        final jsonStr = const JsonEncoder.withIndent('  ').convert(jsonMap);
-        lastJsonString = jsonStr;
+        lastProject = project;
         lastFileName ??= file.name.replaceAll(RegExp(r'\.knxproj$'), '.json');
         if (!lastFileName!.endsWith('.json'))
           lastFileName = '$lastFileName.json';
 
-        status.text = 'Project: ${project.projectInfo.name} — '
-            '${project.installations.length} installation(s), '
-            '${project.datapointTypes.length} datapoint type(s).';
-        jsonOutput.text = jsonStr;
-        jsonTreeView.children.clear();
-        jsonTreeView.append(buildJsonTree(jsonMap));
+        renderOutput();
         resultSection.hidden = false;
       } catch (e, st) {
         errorMessage.text = '$e\n\n$st';
@@ -222,6 +237,26 @@ void main() {
     reader.readAsArrayBuffer(file);
   });
 
+  // Format tabs: Nested / Flat
+  for (final tab in formatTabs) {
+    (tab as ButtonElement).onClick.listen((_) {
+      final format = tab.attributes['data-format']!;
+      if (format == currentFormat) return;
+      currentFormat = format;
+      for (final t in formatTabs) {
+        (t as ButtonElement).attributes['aria-pressed'] =
+            t == tab ? 'true' : 'false';
+        if (t == tab) {
+          t.classes.add('active');
+        } else {
+          t.classes.remove('active');
+        }
+      }
+      renderOutput();
+    });
+  }
+
+  // View tabs: Tree / Raw
   for (final tab in viewTabs) {
     (tab as ButtonElement).onClick.listen((_) {
       final view = tab.attributes['data-view']!;
@@ -244,6 +279,12 @@ void main() {
     if (lastJsonString == null || lastFileName == null) return;
     final blob = Blob([lastJsonString!], 'application/json');
     final url = Url.createObjectUrlFromBlob(blob);
+    final anchor = AnchorElement(href: url)
+      ..setAttribute('download', lastFileName!)
+      ..style.display = 'none';
+    document.body!.append(anchor);
+    anchor.click();
+    anchor.remove();
     Url.revokeObjectUrl(url);
   });
 }
