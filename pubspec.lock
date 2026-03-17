@@ -245,10 +245,10 @@ packages:
     dependency: "direct main"
     description:
       name: knx_parser
-      sha256: "0dba7d64e8eb3e2f97334792c4f68cbcbb9a8a16636813b61e96819c23a7a062"
+      sha256: d1079422979502a43b4fe786851db15b1fe87ba9b42da3ef78b81b5b38684055
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.10.0"
   logging:
     dependency: transitive
     description:

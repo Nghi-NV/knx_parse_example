@@ -150,23 +150,43 @@ void main() {
   String? lastJsonString;
   String? lastFileName;
   KnxProject? lastProject;
-  String currentFormat = 'nested';
+  String currentFormat = 'flat'; // default to flat
 
   final fileNameEl = document.getElementById('fileName')!;
 
   /// Re-render JSON output based on current format
   void renderOutput() {
     if (lastProject == null) return;
-    final jsonMap = currentFormat == 'flat'
-        ? lastProject!.toFlatJson()
-        : lastProject!.toJson();
+
+    final Map<String, dynamic> jsonMap;
+    final String formatLabel;
+
+    if (currentFormat == 'flat') {
+      final flatProject = lastProject!.toFlat();
+      jsonMap = flatProject.toJson();
+      formatLabel = 'Flat';
+
+      final summaryParts = <String>[
+        'Project: ${flatProject.projectName}',
+        if (flatProject.etsVersion != null) flatProject.etsVersion!,
+        '${flatProject.buildings.length} building(s)',
+        '${flatProject.floors.length} floor(s)',
+        '${flatProject.rooms.length} room(s)',
+        '${flatProject.devices.length} device(s)',
+        '${flatProject.groupAddresses.length} GA(s)',
+      ];
+      if (flatProject.hasSecure) summaryParts.add('🔒 Secure');
+      status.text = '[$formatLabel] ${summaryParts.join(' — ')}';
+    } else {
+      jsonMap = lastProject!.toJson();
+      formatLabel = 'Nested';
+      status.text = '[$formatLabel] Project: ${lastProject!.projectInfo.name} — '
+          '${lastProject!.installations.length} installation(s), '
+          '${lastProject!.datapointTypes.length} datapoint type(s).';
+    }
+
     final jsonStr = const JsonEncoder.withIndent('  ').convert(jsonMap);
     lastJsonString = jsonStr;
-
-    final formatLabel = currentFormat == 'flat' ? 'Flat' : 'Nested';
-    status.text = '[$formatLabel] Project: ${lastProject!.projectInfo.name} — '
-        '${lastProject!.installations.length} installation(s), '
-        '${lastProject!.datapointTypes.length} datapoint type(s).';
 
     jsonOutput.text = jsonStr;
     jsonTreeView.children.clear();
