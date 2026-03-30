@@ -5538,7 +5538,7 @@
       _.pdt = t5;
     },
     DeviceInstance_DeviceInstance$fromXml(element) {
-      var t4, t5, t6, _null = null,
+      var t4, t5, t6, t7, t8, _null = null,
         t1 = A.filterElements(new A.XmlDescendantsIterable(element), "ComObjectInstanceRef", _null),
         t2 = t1.$ti,
         t3 = t2._eval$1("MappedIterable<1,ComObjectInstanceRef>"),
@@ -5553,21 +5553,26 @@
       if (t2 == null)
         t2 = 0;
       t3 = element.getAttribute$1(0, "Name");
-      t4 = element.getAttribute$1(0, "ProductRefId");
-      t5 = element.getAttribute$1(0, "Hardware2ProgramRefId");
-      t6 = element.getAttribute$1(0, "Puid");
-      return new A.DeviceInstance(t1, t2, t3, t4, t5, A.Primitives_parseInt(t6 == null ? "" : t6, _null), comObjects, toolKey);
+      t4 = element.getAttribute$1(0, "Description");
+      t5 = element.getAttribute$1(0, "Comment");
+      t6 = element.getAttribute$1(0, "ProductRefId");
+      t7 = element.getAttribute$1(0, "Hardware2ProgramRefId");
+      t8 = element.getAttribute$1(0, "Puid");
+      return new A.DeviceInstance(t1, t2, t3, t4, t5, _null, t6, t7, A.Primitives_parseInt(t8 == null ? "" : t8, _null), comObjects, toolKey);
     },
-    DeviceInstance: function DeviceInstance(t0, t1, t2, t3, t4, t5, t6, t7) {
+    DeviceInstance: function DeviceInstance(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) {
       var _ = this;
       _.id = t0;
       _.address = t1;
       _.name = t2;
-      _.productRefId = t3;
-      _.hardware2ProgramRefId = t4;
-      _.puid = t5;
-      _.comObjectInstanceRefs = t6;
-      _.securityToolKey = t7;
+      _.description = t3;
+      _.comment = t4;
+      _.productName = t5;
+      _.productRefId = t6;
+      _.hardware2ProgramRefId = t7;
+      _.puid = t8;
+      _.comObjectInstanceRefs = t9;
+      _.securityToolKey = t10;
     },
     DeviceInstance_DeviceInstance$fromXml_closure: function DeviceInstance_DeviceInstance$fromXml_closure() {
     },
@@ -5744,23 +5749,26 @@
       this.formattedAddress = t1;
       this.name = t2;
     },
-    KnxDevice: function KnxDevice(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) {
+    KnxDevice: function KnxDevice(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17) {
       var _ = this;
       _.id = t0;
       _.address = t1;
       _.formattedAddress = t2;
       _.name = t3;
-      _.roomId = t4;
-      _.roomName = t5;
-      _.areaId = t6;
-      _.areaName = t7;
-      _.lineId = t8;
-      _.lineName = t9;
-      _.productRefId = t10;
-      _.hardware2ProgramRefId = t11;
-      _.puid = t12;
-      _.comObjects = t13;
-      _.securityToolKey = t14;
+      _.description = t4;
+      _.comment = t5;
+      _.productName = t6;
+      _.roomId = t7;
+      _.roomName = t8;
+      _.areaId = t9;
+      _.areaName = t10;
+      _.lineId = t11;
+      _.lineName = t12;
+      _.productRefId = t13;
+      _.hardware2ProgramRefId = t14;
+      _.puid = t15;
+      _.comObjects = t16;
+      _.securityToolKey = t17;
     },
     KnxDevice_toJson_closure: function KnxDevice_toJson_closure() {
     },
@@ -15886,6 +15894,15 @@
       t2 = _this.name;
       if (t2 != null && t2.length !== 0)
         t1.$indexSet(0, "name", t2);
+      t2 = _this.description;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "description", t2);
+      t2 = _this.comment;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "comment", t2);
+      t2 = _this.productName;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "productName", t2);
       t2 = _this.productRefId;
       if (t2 != null)
         t1.$indexSet(0, "productRefId", t2);
@@ -15905,9 +15922,9 @@
         t1.$indexSet(0, "securityToolKey", t2);
       return t1;
     },
-    copyWithName$1(newName) {
+    copyWithProductName$1(productCatalogName) {
       var _this = this;
-      return new A.DeviceInstance(_this.id, _this.address, newName, _this.productRefId, _this.hardware2ProgramRefId, _this.puid, _this.comObjectInstanceRefs, _this.securityToolKey);
+      return new A.DeviceInstance(_this.id, _this.address, _this.name, _this.description, _this.comment, productCatalogName, _this.productRefId, _this.hardware2ProgramRefId, _this.puid, _this.comObjectInstanceRefs, _this.securityToolKey);
     },
     toString$0(_) {
       return "DeviceInstance(" + this.id + ", address=" + this.address + ")";
@@ -16390,6 +16407,15 @@
       t2 = _this.name;
       if (t2 != null && t2.length !== 0)
         t1.$indexSet(0, "name", t2);
+      t2 = _this.description;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "description", t2);
+      t2 = _this.comment;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "comment", t2);
+      t2 = _this.productName;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "productName", t2);
       t2 = _this.roomId;
       if (t2 != null)
         t1.$indexSet(0, "roomId", t2);
@@ -16819,7 +16845,7 @@
       t2 = room == null;
       t3 = t2 ? null : room.id;
       t2 = t2 ? null : room.name;
-      return new A.KnxDevice(t1, d.address, entry.formattedAddress, d.name, t3, t2, entry.areaId, entry.areaName, entry.lineId, entry.lineName, d.productRefId, d.hardware2ProgramRefId, d.puid, d.comObjectInstanceRefs, d.securityToolKey);
+      return new A.KnxDevice(t1, d.address, entry.formattedAddress, d.name, d.description, d.comment, d.productName, t3, t2, entry.areaId, entry.areaName, entry.lineId, entry.lineName, d.productRefId, d.hardware2ProgramRefId, d.puid, d.comObjectInstanceRefs, d.securityToolKey);
     },
     $signature: 53
   };
@@ -17113,7 +17139,7 @@
       var productName;
       type$.DeviceInstance._as(device);
       productName = this.productCatalog.$index(0, device.productRefId);
-      return productName != null ? device.copyWithName$1(productName) : device;
+      return productName != null ? device.copyWithProductName$1(productName) : device;
     },
     $signature: 28
   };
@@ -17173,7 +17199,7 @@
       var productName;
       type$.DeviceInstance._as(device);
       productName = this.productCatalog.$index(0, device.productRefId);
-      return productName != null ? device.copyWithName$1(productName) : device;
+      return productName != null ? device.copyWithProductName$1(productName) : device;
     },
     $signature: 28
   };
