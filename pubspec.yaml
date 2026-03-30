@@ -5,7 +5,10 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  knx_parser: ^1.10.1
+  knx_parser:
+    git:
+      url: https://github.com/Nghi-NV/knx_parser.git
+      ref: main
 
 dev_dependencies:
   build_runner: ^2.4.0

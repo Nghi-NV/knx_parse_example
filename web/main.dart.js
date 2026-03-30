@@ -15923,8 +15923,10 @@
       return t1;
     },
     copyWithProductName$1(productCatalogName) {
-      var _this = this;
-      return new A.DeviceInstance(_this.id, _this.address, _this.name, _this.description, _this.comment, productCatalogName, _this.productRefId, _this.hardware2ProgramRefId, _this.puid, _this.comObjectInstanceRefs, _this.securityToolKey);
+      var _this = this,
+        t1 = _this.name;
+      t1 = t1 != null && t1.length !== 0 ? t1 : productCatalogName;
+      return new A.DeviceInstance(_this.id, _this.address, t1, _this.description, _this.comment, productCatalogName, _this.productRefId, _this.hardware2ProgramRefId, _this.puid, _this.comObjectInstanceRefs, _this.securityToolKey);
     },
     toString$0(_) {
       return "DeviceInstance(" + this.id + ", address=" + this.address + ")";
