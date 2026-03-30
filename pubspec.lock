@@ -246,10 +246,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "4cc22b05631b10f27b4f9728e94c401cf26adf08"
+      resolved-ref: "87b6f52b871842f34b73c4d70ae7dfeee07174ee"
       url: "https://github.com/Nghi-NV/knx_parser.git"
     source: git
-    version: "1.10.2"
+    version: "1.11.0"
   logging:
     dependency: transitive
     description:

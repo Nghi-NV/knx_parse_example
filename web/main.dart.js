@@ -4184,6 +4184,9 @@
       this.error = t0;
       this.stackTrace = t1;
     },
+    LinkedHashMap_LinkedHashMap($K, $V) {
+      return new A.JsLinkedHashMap($K._eval$1("@<0>")._bind$1($V)._eval$1("JsLinkedHashMap<1,2>"));
+    },
     LinkedHashMap_LinkedHashMap$_literal(keyValuePairs, $K, $V) {
       return $K._eval$1("@<0>")._bind$1($V)._eval$1("LinkedHashMap<1,2>")._as(A.fillLiteralMap(keyValuePairs, new A.JsLinkedHashMap($K._eval$1("@<0>")._bind$1($V)._eval$1("JsLinkedHashMap<1,2>"))));
     },
@@ -4205,6 +4208,11 @@
     _LinkedHashSetIterator$(_set, _modifications, $E) {
       var t1 = new A._LinkedHashSetIterator(_set, _modifications, $E._eval$1("_LinkedHashSetIterator<0>"));
       t1._collection$_cell = _set._collection$_first;
+      return t1;
+    },
+    LinkedHashMap_LinkedHashMap$of(other, $K, $V) {
+      var t1 = A.LinkedHashMap_LinkedHashMap($K, $V);
+      t1.addAll$1(0, other);
       return t1;
     },
     MapBase_mapToString(m) {
@@ -5578,10 +5586,23 @@
     },
     DeviceInstance_toJson_closure: function DeviceInstance_toJson_closure() {
     },
-    ComObjectInstanceRef: function ComObjectInstanceRef(t0, t1, t2) {
-      this.refId = t0;
-      this.text = t1;
-      this.links = t2;
+    ComObjectInstanceRef: function ComObjectInstanceRef(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) {
+      var _ = this;
+      _.refId = t0;
+      _.text = t1;
+      _.links = t2;
+      _.channelId = t3;
+      _.name = t4;
+      _.description = t5;
+      _.number = t6;
+      _.functionText = t7;
+      _.objectSize = t8;
+      _.datapointType = t9;
+      _.readFlag = t10;
+      _.writeFlag = t11;
+      _.transmitFlag = t12;
+      _.updateFlag = t13;
+      _.groupAddresses = t14;
     },
     GroupAddress: function GroupAddress(t0, t1, t2, t3, t4, t5, t6, t7) {
       var _ = this;
@@ -6107,6 +6128,58 @@
     },
     KnxProjectParser__mergeProductNamesIntoInstallations_closure: function KnxProjectParser__mergeProductNamesIntoInstallations_closure(t0) {
       this.productCatalog = t0;
+    },
+    KnxProjectParser__resolveGaLinks_closure: function KnxProjectParser__resolveGaLinks_closure() {
+    },
+    KnxProjectParser__enrichComObjectsInInstallations_closure: function KnxProjectParser__enrichComObjectsInInstallations_closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichComObjectsInInstallations__closure: function KnxProjectParser__enrichComObjectsInInstallations__closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichComObjectsInInstallations___closure: function KnxProjectParser__enrichComObjectsInInstallations___closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichComObjectsInInstallations____closure: function KnxProjectParser__enrichComObjectsInInstallations____closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichComObjectsInInstallations_____closure: function KnxProjectParser__enrichComObjectsInInstallations_____closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichComObjectsInInstallations____closure0: function KnxProjectParser__enrichComObjectsInInstallations____closure0(t0, t1, t2, t3) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.comObjectRefMap = t2;
+      _.installations = t3;
+    },
+    KnxProjectParser__enrichDeviceComObjects_closure: function KnxProjectParser__enrichDeviceComObjects_closure(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.$this = t0;
+      _.comObjectDefs = t1;
+      _.mfgPrefix = t2;
+      _.comObjectRefMap = t3;
+      _.installations = t4;
     },
     Context: function Context(t0, t1) {
       this.buffer = t0;
@@ -8885,7 +8958,7 @@
       B.JSArray_methods.add$1(this.$arguments, argument);
       ++t1.argumentCount;
     },
-    $signature: 42
+    $signature: 43
   };
   A.SafeToStringHook.prototype = {};
   A.TypeErrorDecoder.prototype = {
@@ -9068,7 +9141,7 @@
       return bucket[index].hashMapCellValue;
     },
     $indexSet(_, key, value) {
-      var strings, nums, rest, hash, bucket, index, _this = this,
+      var strings, nums, _this = this,
         t1 = A._instanceType(_this);
       t1._precomputed1._as(key);
       t1._rest[1]._as(value);
@@ -9078,21 +9151,27 @@
       } else if (typeof key == "number" && (key & 0x3fffffff) === key) {
         nums = _this._nums;
         _this._addHashTableEntry$3(nums == null ? _this._nums = _this._newHashTable$0() : nums, key, value);
-      } else {
-        rest = _this.__js_helper$_rest;
-        if (rest == null)
-          rest = _this.__js_helper$_rest = _this._newHashTable$0();
-        hash = _this.internalComputeHashCode$1(key);
-        bucket = rest[hash];
-        if (bucket == null)
-          rest[hash] = [_this._newLinkedCell$2(key, value)];
-        else {
-          index = _this.internalFindBucketIndex$2(bucket, key);
-          if (index >= 0)
-            bucket[index].hashMapCellValue = value;
-          else
-            bucket.push(_this._newLinkedCell$2(key, value));
-        }
+      } else
+        _this.internalSet$2(key, value);
+    },
+    internalSet$2(key, value) {
+      var rest, hash, bucket, index, _this = this,
+        t1 = A._instanceType(_this);
+      t1._precomputed1._as(key);
+      t1._rest[1]._as(value);
+      rest = _this.__js_helper$_rest;
+      if (rest == null)
+        rest = _this.__js_helper$_rest = _this._newHashTable$0();
+      hash = _this.internalComputeHashCode$1(key);
+      bucket = rest[hash];
+      if (bucket == null)
+        rest[hash] = [_this._newLinkedCell$2(key, value)];
+      else {
+        index = _this.internalFindBucketIndex$2(bucket, key);
+        if (index >= 0)
+          bucket[index].hashMapCellValue = value;
+        else
+          bucket.push(_this._newLinkedCell$2(key, value));
       }
     },
     putIfAbsent$2(key, ifAbsent) {
@@ -9323,7 +9402,7 @@
     call$1(o) {
       return this.getTag(o);
     },
-    $signature: 27
+    $signature: 26
   };
   A.initHooks_closure0.prototype = {
     call$2(o, tag) {
@@ -9771,7 +9850,7 @@
       t1.storedCallback = null;
       f.call$0();
     },
-    $signature: 29
+    $signature: 32
   };
   A._AsyncRun__initializeScheduleImmediate_closure.prototype = {
     call$1(callback) {
@@ -9787,13 +9866,13 @@
     call$0() {
       this.callback.call$0();
     },
-    $signature: 18
+    $signature: 17
   };
   A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback.prototype = {
     call$0() {
       this.callback.call$0();
     },
-    $signature: 18
+    $signature: 17
   };
   A._TimerImpl.prototype = {
     _TimerImpl$2(milliseconds, callback) {
@@ -9814,13 +9893,13 @@
     call$1(result) {
       return this.bodyFunction.call$2(0, result);
     },
-    $signature: 72
+    $signature: 68
   };
   A._awaitOnObject_closure0.prototype = {
     call$2(error, stackTrace) {
       this.bodyFunction.call$2(1, new A.ExceptionAndStackTrace(error, type$.StackTrace._as(stackTrace)));
     },
-    $signature: 85
+    $signature: 73
   };
   A._wrapJsFunctionForAsync_closure.prototype = {
     call$2(errorCode, result) {
@@ -10187,7 +10266,7 @@
     call$1(__wc0_formal) {
       this.joinedResult._completeWithResultOf$1(this.originalSource);
     },
-    $signature: 29
+    $signature: 32
   };
   A._Future__propagateToListeners_handleWhenCompleteCallback_closure0.prototype = {
     call$2(e, s) {
@@ -10637,7 +10716,7 @@
       t2 = A.S(v);
       t1._contents += t2;
     },
-    $signature: 6
+    $signature: 12
   };
   A._UnmodifiableMapMixin.prototype = {};
   A.MapView.prototype = {
@@ -10724,7 +10803,7 @@
       }
       return null;
     },
-    $signature: 31
+    $signature: 37
   };
   A._Utf8Decoder__decoderNonfatal_closure.prototype = {
     call$0() {
@@ -10736,7 +10815,7 @@
       }
       return null;
     },
-    $signature: 31
+    $signature: 37
   };
   A.Base64Codec.prototype = {
     get$encoder() {
@@ -11006,7 +11085,7 @@
       B.JSArray_methods.$indexSet(t1, t2.i++, key);
       B.JSArray_methods.$indexSet(t1, t2.i++, value);
     },
-    $signature: 6
+    $signature: 12
   };
   A._JsonPrettyPrintMixin.prototype = {
     writeList$1(list) {
@@ -11074,7 +11153,7 @@
       B.JSArray_methods.$indexSet(t1, t2.i++, key);
       B.JSArray_methods.$indexSet(t1, t2.i++, value);
     },
-    $signature: 6
+    $signature: 12
   };
   A._JsonStringStringifier.prototype = {
     get$_partialResult() {
@@ -11477,7 +11556,7 @@
         return 0;
       return A.int_parse(matched);
     },
-    $signature: 12
+    $signature: 33
   };
   A.DateTime_parse_parseMilliAndMicroseconds.prototype = {
     call$1(matched) {
@@ -11494,7 +11573,7 @@
       }
       return result;
     },
-    $signature: 12
+    $signature: 33
   };
   A._Enum.prototype = {
     toString$0(_) {
@@ -12283,7 +12362,7 @@
     call$1(e) {
       return this.onData.call$1(type$.Event._as(e));
     },
-    $signature: 13
+    $signature: 35
   };
   A.ImmutableListMixin.prototype = {
     get$iterator(receiver) {
@@ -12383,13 +12462,13 @@
     call$1(n) {
       return type$.Element._as(type$.Node._as(n));
     },
-    $signature: 68
+    $signature: 63
   };
   A.FilteredElementList_removeRange_closure.prototype = {
     call$1(el) {
       return J.remove$0$x(type$.Element._as(el));
     },
-    $signature: 71
+    $signature: 66
   };
   A.SvgElement.prototype = {
     get$children(receiver) {
@@ -15858,13 +15937,13 @@
         t4 = "";
       return new A.DatapointSubtype(t1, t2, t3, t4, e.getAttribute$1(0, "Default") === "true", e.getAttribute$1(0, "PDT"));
     },
-    $signature: 127
+    $signature: 128
   };
   A.DatapointType_toJson_closure.prototype = {
     call$1(s) {
       return type$.DatapointSubtype._as(s).toJson$0();
     },
-    $signature: 80
+    $signature: 71
   };
   A.DatapointSubtype.prototype = {
     toJson$0() {
@@ -15934,27 +16013,65 @@
   };
   A.DeviceInstance_DeviceInstance$fromXml_closure.prototype = {
     call$1(e) {
+      var _null = null;
       type$.XmlElement._as(e);
-      return new A.ComObjectInstanceRef(e.getAttribute$1(0, "RefId"), e.getAttribute$1(0, "Text"), e.getAttribute$1(0, "Links"));
+      return new A.ComObjectInstanceRef(e.getAttribute$1(0, "RefId"), e.getAttribute$1(0, "Text"), e.getAttribute$1(0, "Links"), e.getAttribute$1(0, "ChannelId"), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.List_empty3);
     },
-    $signature: 84
+    $signature: 72
   };
   A.DeviceInstance_toJson_closure.prototype = {
     call$1(e) {
       return type$.ComObjectInstanceRef._as(e).toJson$0();
     },
-    $signature: 15
+    $signature: 14
   };
   A.ComObjectInstanceRef.prototype = {
     toJson$0() {
-      var t1 = A.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$.dynamic),
-        t2 = this.refId;
+      var _this = this,
+        t1 = A.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$.dynamic),
+        t2 = _this.refId;
       if (t2 != null)
         t1.$indexSet(0, "refId", t2);
-      t2 = this.text;
-      if (t2 != null)
+      t2 = _this.text;
+      if (t2 != null && t2.length !== 0)
         t1.$indexSet(0, "text", t2);
-      t2 = this.links;
+      t2 = _this.channelId;
+      if (t2 != null)
+        t1.$indexSet(0, "channelId", t2);
+      t2 = _this.name;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "name", t2);
+      t2 = _this.description;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "description", t2);
+      t2 = _this.number;
+      if (t2 != null)
+        t1.$indexSet(0, "number", t2);
+      t2 = _this.functionText;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "functionText", t2);
+      t2 = _this.objectSize;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "objectSize", t2);
+      t2 = _this.datapointType;
+      if (t2 != null && t2.length !== 0)
+        t1.$indexSet(0, "datapointType", t2);
+      t2 = _this.readFlag;
+      if (t2 != null)
+        t1.$indexSet(0, "readFlag", t2);
+      t2 = _this.writeFlag;
+      if (t2 != null)
+        t1.$indexSet(0, "writeFlag", t2);
+      t2 = _this.transmitFlag;
+      if (t2 != null)
+        t1.$indexSet(0, "transmitFlag", t2);
+      t2 = _this.updateFlag;
+      if (t2 != null)
+        t1.$indexSet(0, "updateFlag", t2);
+      t2 = _this.groupAddresses;
+      if (t2.length !== 0)
+        t1.$indexSet(0, "groupAddresses", t2);
+      t2 = _this.links;
       if (t2 != null)
         t1.$indexSet(0, "links", t2);
       return t1;
@@ -16048,7 +16165,7 @@
     call$1(e) {
       return A.Area_Area$fromXml(type$.XmlElement._as(e));
     },
-    $signature: 86
+    $signature: 76
   };
   A.Installation__parseGroupAddresses_parseGroupRanges.prototype = {
     call$2$parent(rangesElement, $parent) {
@@ -16108,7 +16225,7 @@
     call$1(rangesElement) {
       return this.call$2$parent(rangesElement, null);
     },
-    $signature: 93
+    $signature: 81
   };
   A.Installation__parseLocations_parseSpaces.prototype = {
     call$2$parentLocation($parent, parentLocation) {
@@ -16123,25 +16240,25 @@
     call$1($parent) {
       return this.call$2$parentLocation($parent, null);
     },
-    $signature: 100
+    $signature: 85
   };
   A.Installation_toJson_closure.prototype = {
     call$1(ga) {
       return type$.GroupAddress._as(ga).toJson$0();
     },
-    $signature: 101
+    $signature: 86
   };
   A.Installation_toJson_closure0.prototype = {
     call$1(gr) {
       return type$.GroupRange._as(gr).toJson$0();
     },
-    $signature: 102
+    $signature: 87
   };
   A.Installation_toJson_closure1.prototype = {
     call$1(l) {
       return type$.Location._as(l).toJson$0();
     },
-    $signature: 107
+    $signature: 94
   };
   A._GroupAddressParseResult.prototype = {};
   A.KnxFlatProject.prototype = {
@@ -16221,55 +16338,55 @@
     call$1(b) {
       return type$.KnxBuilding._as(b).toJson$0();
     },
-    $signature: 121
+    $signature: 101
   };
   A.KnxFlatProject_toJson_closure0.prototype = {
     call$1(f) {
       return type$.KnxFloor._as(f).toJson$0();
     },
-    $signature: 123
+    $signature: 102
   };
   A.KnxFlatProject_toJson_closure1.prototype = {
     call$1(r) {
       return type$.KnxRoom._as(r).toJson$0();
     },
-    $signature: 125
+    $signature: 103
   };
   A.KnxFlatProject_toJson_closure2.prototype = {
     call$1(a) {
       return type$.KnxArea._as(a).toJson$0();
     },
-    $signature: 126
+    $signature: 108
   };
   A.KnxFlatProject_toJson_closure3.prototype = {
     call$1(l) {
       return type$.KnxLine._as(l).toJson$0();
     },
-    $signature: 35
+    $signature: 122
   };
   A.KnxFlatProject_toJson_closure4.prototype = {
     call$1(d) {
       return type$.KnxDevice._as(d).toJson$0();
     },
-    $signature: 36
+    $signature: 124
   };
   A.KnxFlatProject_toJson_closure5.prototype = {
     call$1(ga) {
       return type$.KnxGroupAddress._as(ga).toJson$0();
     },
-    $signature: 37
+    $signature: 126
   };
   A.KnxFlatProject_toJson_closure6.prototype = {
     call$1(gr) {
       return type$.KnxGroupRange._as(gr).toJson$0();
     },
-    $signature: 38
+    $signature: 127
   };
   A.KnxFlatProject_toJson_closure7.prototype = {
     call$1(d) {
       return type$.DatapointType._as(d).toJson$0();
     },
-    $signature: 20
+    $signature: 15
   };
   A.KnxBuilding.prototype = {
     toJson$0() {
@@ -16339,7 +16456,7 @@
     call$1(d) {
       return type$.KnxDeviceRef._as(d).toJson$0();
     },
-    $signature: 16
+    $signature: 21
   };
   A.KnxArea.prototype = {
     toJson$0() {
@@ -16461,7 +16578,7 @@
     call$1(c) {
       return type$.ComObjectInstanceRef._as(c).toJson$0();
     },
-    $signature: 15
+    $signature: 14
   };
   A.KnxGroupAddress.prototype = {
     toJson$0() {
@@ -16497,7 +16614,7 @@
     call$1(d) {
       return type$.KnxDeviceRef._as(d).toJson$0();
     },
-    $signature: 16
+    $signature: 21
   };
   A.KnxGroupRange.prototype = {
     toJson$0() {
@@ -16550,7 +16667,7 @@
     call$1(k) {
       return type$.KnxDeviceToolKey._as(k).toJson$0();
     },
-    $signature: 34
+    $signature: 42
   };
   A.KnxGaSecureKey.prototype = {
     toJson$0() {
@@ -16700,7 +16817,7 @@
         gaKeys = A.List_List$_of(new A.MappedIterable(new A.WhereIterable(allGroupAddresses, type$.bool_Function_GroupAddress._as(new A.KnxProject_toFlat_closure12()), type$.WhereIterable_GroupAddress), type$.KnxGaSecureKey_Function_GroupAddress._as(new A.KnxProject_toFlat_closure13()), t1), t1._eval$1("Iterable.E"));
         t1 = type$.MappedIterable__DeviceEntry_KnxDeviceToolKey;
         deviceToolKeys = A.List_List$_of(new A.MappedIterable(new A.WhereIterable(deviceEntries, type$.bool_Function__DeviceEntry._as(new A.KnxProject_toFlat_closure14()), type$.WhereIterable__DeviceEntry), type$.KnxDeviceToolKey_Function__DeviceEntry._as(new A.KnxProject_toFlat_closure15()), t1), t1._eval$1("Iterable.E"));
-        secureKeys = new A.KnxSecureKeys(null, B.List_empty3, B.List_empty4, gaKeys, deviceToolKeys);
+        secureKeys = new A.KnxSecureKeys(null, B.List_empty4, B.List_empty5, gaKeys, deviceToolKeys);
       } else
         secureKeys = null;
       t1 = this.projectInfo;
@@ -16714,13 +16831,13 @@
     call$1(i) {
       return type$.Installation._as(i).toJson$0();
     },
-    $signature: 43
+    $signature: 38
   };
   A.KnxProject_toJson_closure0.prototype = {
     call$1(d) {
       return type$.DatapointType._as(d).toJson$0();
     },
-    $signature: 20
+    $signature: 15
   };
   A.KnxProject_toFlat_closure.prototype = {
     call$1(l) {
@@ -16745,14 +16862,14 @@
       var t1 = type$.GroupAddress._as(ga).key;
       return t1 != null && t1.length !== 0;
     },
-    $signature: 19
+    $signature: 18
   };
   A.KnxProject_toFlat_closure3.prototype = {
     call$1(e) {
       var t1 = type$._DeviceEntry._as(e).device.securityToolKey;
       return t1 != null && t1.length !== 0;
     },
-    $signature: 33
+    $signature: 19
   };
   A.KnxProject_toFlat_closure4.prototype = {
     call$1(building) {
@@ -16778,7 +16895,7 @@
     call$1(f) {
       return type$.Location._as(f).id;
     },
-    $signature: 21
+    $signature: 20
   };
   A.KnxProject_toFlat_closure5.prototype = {
     call$1(floor) {
@@ -16806,7 +16923,7 @@
     call$1(r) {
       return type$.Location._as(r).id;
     },
-    $signature: 21
+    $signature: 20
   };
   A.KnxProject_toFlat_closure6.prototype = {
     call$1(room) {
@@ -16827,7 +16944,7 @@
     call$1(id) {
       return this.deviceRefMap.containsKey$1(A._asString(id));
     },
-    $signature: 8
+    $signature: 6
   };
   A.KnxProject_toFlat__closure0.prototype = {
     call$1(id) {
@@ -16872,7 +16989,7 @@
       t3 = A.KnxProject__formatDpt(ga.datapointType);
       t4 = this.gaToDeviceRefs.$index(0, t1);
       if (t4 == null)
-        t4 = B.List_empty5;
+        t4 = B.List_empty6;
       return new A.KnxGroupAddress(t1, ga.address, t2, ga.name, t3, ga.range.name, ga.key, t4);
     },
     $signature: 56
@@ -16892,7 +17009,7 @@
       var t1 = type$.GroupAddress._as(ga).key;
       return t1 != null && t1.length !== 0;
     },
-    $signature: 19
+    $signature: 18
   };
   A.KnxProject_toFlat_closure13.prototype = {
     call$1(ga) {
@@ -16906,7 +17023,7 @@
       var t1 = type$._DeviceEntry._as(e).device.securityToolKey;
       return t1 != null && t1.length !== 0;
     },
-    $signature: 33
+    $signature: 19
   };
   A.KnxProject_toFlat_closure15.prototype = {
     call$1(e) {
@@ -17014,7 +17131,7 @@
     call$1(a) {
       return type$.Area._as(a).copyWithProductCatalog$1(this.productCatalog);
     },
-    $signature: 63
+    $signature: 22
   };
   A.Area.prototype = {
     toJson$0() {
@@ -17063,7 +17180,7 @@
     call$1(l) {
       return type$.Line._as(l).copyWithProductCatalog$1(this.productCatalog);
     },
-    $signature: 66
+    $signature: 23
   };
   A.Line.prototype = {
     toJson$0() {
@@ -17116,7 +17233,7 @@
     call$1(e) {
       return A.DeviceInstance_DeviceInstance$fromXml(type$.XmlElement._as(e));
     },
-    $signature: 22
+    $signature: 24
   };
   A.Line_Line$fromXml_closure1.prototype = {
     call$1(s) {
@@ -17134,7 +17251,7 @@
     call$1(d) {
       return type$.DeviceInstance._as(d).toJson$0();
     },
-    $signature: 23
+    $signature: 25
   };
   A.Line_copyWithProductCatalog_closure.prototype = {
     call$1(device) {
@@ -17143,13 +17260,13 @@
       productName = this.productCatalog.$index(0, device.productRefId);
       return productName != null ? device.copyWithProductName$1(productName) : device;
     },
-    $signature: 28
+    $signature: 7
   };
   A.Line_copyWithProductCatalog_closure0.prototype = {
     call$1(s) {
       return type$.Segment._as(s).copyWithProductCatalog$1(this.productCatalog);
     },
-    $signature: 73
+    $signature: 31
   };
   A.Segment.prototype = {
     toJson$0() {
@@ -17188,13 +17305,13 @@
     call$1(e) {
       return A.DeviceInstance_DeviceInstance$fromXml(type$.XmlElement._as(e));
     },
-    $signature: 22
+    $signature: 24
   };
   A.Segment_toJson_closure.prototype = {
     call$1(d) {
       return type$.DeviceInstance._as(d).toJson$0();
     },
-    $signature: 23
+    $signature: 25
   };
   A.Segment_copyWithProductCatalog_closure.prototype = {
     call$1(device) {
@@ -17203,7 +17320,7 @@
       productName = this.productCatalog.$index(0, device.productRefId);
       return productName != null ? device.copyWithProductName$1(productName) : device;
     },
-    $signature: 28
+    $signature: 7
   };
   A.KnxProjectParser.prototype = {
     _encodeUtf16Le$1(input) {
@@ -17254,7 +17371,7 @@
       return null;
     },
     parseBytes$2$password(bytes, password) {
-      var projectArchive, zipBytes, ets6Password, targetArchive, file, raw, $content, from0, f, raw0, hwContent, products, f0, raw1, e, isEts6, t3, t4, t5, t6, t7, passwordBytes, saltBytes, pbkdf2, derivedKey, exception, targetArchive0, t8, t9, t10, t11, t12, t13, result, $document, matcher, it, etsVersion, _this = this, _null = null,
+      var projectArchive, zipBytes, ets6Password, targetArchive, file, raw, $content, from0, f, raw0, hwContent, products, raw1, appContent, f0, raw2, e, isEts6, t4, t5, t6, t7, passwordBytes, saltBytes, pbkdf2, derivedKey, exception, targetArchive0, t8, t9, t10, t11, t12, t13, result, $document, matcher, it, etsVersion, _this = this, _null = null,
         t1 = type$.List_int,
         archive = _this._decodeArchive$2$password(t1._as(bytes), password),
         projectInfo = null,
@@ -17263,6 +17380,9 @@
         projectId = null,
         t2 = type$.String,
         productCatalog = A.LinkedHashMap_LinkedHashMap$_empty(t2, t2),
+        t3 = type$.Map_String_String,
+        comObjectDefs = A.LinkedHashMap_LinkedHashMap$_empty(t2, t3),
+        comObjectRefMap = A.LinkedHashMap_LinkedHashMap$_empty(t2, t3),
         schemaVersion = _this._getSchemaVersion$1(archive);
       t2 = schemaVersion == null;
       isEts6 = !t2 && schemaVersion >= 21;
@@ -17400,12 +17520,10 @@
         for (t3 = archive._files, t4 = A._arrayInstanceType(t3), t3 = new J.ArrayIterator(t3, t3.length, t4._eval$1("ArrayIterator<1>")), t4 = t4._precomputed1; t3.moveNext$0();) {
           t5 = t3.__interceptors$_current;
           f = t5 == null ? t4._as(t5) : t5;
-          if (f.isFile) {
-            t5 = f.name;
-            t5 = A.stringContainsUnchecked(t5, "/Hardware.xml", 0);
-          } else
-            t5 = false;
-          if (t5)
+          if (!f.isFile)
+            continue;
+          t5 = f.name;
+          if (A.stringContainsUnchecked(t5, "/Hardware.xml", 0))
             try {
               t5 = f;
               t6 = t5._content;
@@ -17417,9 +17535,42 @@
               J.addAll$1$ax(productCatalog, products);
             } catch (exception) {
             }
+          else {
+            t5 = f.name;
+            t6 = false;
+            if (A.stringContainsUnchecked(t5, "/M-", 0))
+              if (B.JSString_methods.endsWith$1(f.name, ".xml")) {
+                t5 = f.name;
+                if (!A.stringContainsUnchecked(t5, "Hardware", 0)) {
+                  t5 = f.name;
+                  if (!A.stringContainsUnchecked(t5, "Catalog", 0)) {
+                    t5 = f.name;
+                    t5 = !A.stringContainsUnchecked(t5, "Baggages", 0);
+                  } else
+                    t5 = t6;
+                } else
+                  t5 = t6;
+              } else
+                t5 = t6;
+            else
+              t5 = t6;
+            if (t5)
+              try {
+                t5 = f;
+                t6 = t5._content;
+                if ((t6 instanceof A.ZipFile ? t5._content = t6.get$content(0) : t6) == null)
+                  t5.decompress$0();
+                raw1 = t1._as(t5._content);
+                appContent = _this._decodeUtf8WithBom$1(raw1);
+                _this._parseComObjectDefinitions$3(appContent, comObjectDefs, comObjectRefMap);
+              } catch (exception) {
+              }
+          }
         }
         if (productCatalog.__js_helper$_length !== 0)
           installations = _this._mergeProductNamesIntoInstallations$2(installations, productCatalog);
+        if (comObjectDefs.__js_helper$_length !== 0 || comObjectRefMap.__js_helper$_length !== 0)
+          installations = _this._enrichComObjectsInInstallations$3(installations, comObjectDefs, comObjectRefMap);
         if (J.get$length$asx(datapointTypes) === 0)
           for (t3 = archive._files, t4 = A._arrayInstanceType(t3), t3 = new J.ArrayIterator(t3, t3.length, t4._eval$1("ArrayIterator<1>")), t4 = t4._precomputed1; t3.moveNext$0();) {
             t5 = t3.__interceptors$_current;
@@ -17430,8 +17581,8 @@
                 t4 = t3._content;
                 if ((t4 instanceof A.ZipFile ? t3._content = t4.get$content(0) : t4) == null)
                   t3.decompress$0();
-                raw1 = t1._as(t3._content);
-                datapointTypes = _this._parseDatapointTypes$1(_this._decodeUtf8WithBom$1(raw1));
+                raw2 = t1._as(t3._content);
+                datapointTypes = _this._parseDatapointTypes$1(_this._decodeUtf8WithBom$1(raw2));
               } catch (exception) {
               }
               break;
@@ -17546,6 +17697,152 @@
       t2 = t1._eval$1("MappedListIterable<1,Installation>");
       t1 = A.List_List$_of(new A.MappedListIterable(installations, t1._eval$1("Installation(1)")._as(new A.KnxProjectParser__mergeProductNamesIntoInstallations_closure(type$.Map_String_String._as(productCatalog))), t2), t2._eval$1("ListIterable.E"));
       return t1;
+    },
+    _parseComObjectDefinitions$3(xmlContent, comObjectDefs, comObjectRefMap) {
+      var $document, co, id, attrs, attr, coRef, id0, refId, attrs0, attr0, t2, t3, t4, t5, t6, exception, _null = null,
+        t1 = type$.Map_of_String_and_Map_String_String;
+      t1._as(comObjectDefs);
+      t1._as(comObjectRefMap);
+      try {
+        $document = A.XmlDocument_XmlDocument$parse(xmlContent);
+        for (t1 = A.filterElements(new A.XmlDescendantsIterable($document), "ComObject", _null), t2 = J.get$iterator$ax(t1.__internal$_iterable), t1 = new A.WhereIterator(t2, t1._f, t1.$ti._eval$1("WhereIterator<1>")), t3 = type$.String; t1.moveNext$0();) {
+          co = t2.get$current();
+          t4 = co.getAttributeNode$2$namespace("Id", _null);
+          id = t4 == null ? _null : t4.value;
+          if (id == null)
+            continue;
+          attrs = A.LinkedHashMap_LinkedHashMap$_empty(t3, t3);
+          for (t4 = co.XmlHasAttributes_attributes._base, t5 = A._arrayInstanceType(t4), t4 = new J.ArrayIterator(t4, t4.length, t5._eval$1("ArrayIterator<1>")), t5 = t5._precomputed1; t4.moveNext$0();) {
+            t6 = t4.__interceptors$_current;
+            attr = t6 == null ? t5._as(t6) : t6;
+            J.$indexSet$ax(attrs, attr.name.get$local(), attr.value);
+          }
+          comObjectDefs.$indexSet(0, id, attrs);
+        }
+        for (t1 = A.filterElements(new A.XmlDescendantsIterable($document), "ComObjectRef", _null), t2 = J.get$iterator$ax(t1.__internal$_iterable), t1 = new A.WhereIterator(t2, t1._f, t1.$ti._eval$1("WhereIterator<1>")); t1.moveNext$0();) {
+          coRef = t2.get$current();
+          t4 = coRef.getAttributeNode$2$namespace("Id", _null);
+          id0 = t4 == null ? _null : t4.value;
+          t4 = coRef.getAttributeNode$2$namespace("RefId", _null);
+          refId = t4 == null ? _null : t4.value;
+          if (id0 == null)
+            continue;
+          attrs0 = A.LinkedHashMap_LinkedHashMap$_empty(t3, t3);
+          for (t4 = coRef.XmlHasAttributes_attributes._base, t5 = A._arrayInstanceType(t4), t4 = new J.ArrayIterator(t4, t4.length, t5._eval$1("ArrayIterator<1>")), t5 = t5._precomputed1; t4.moveNext$0();) {
+            t6 = t4.__interceptors$_current;
+            attr0 = t6 == null ? t5._as(t6) : t6;
+            J.$indexSet$ax(attrs0, attr0.name.get$local(), attr0.value);
+          }
+          if (refId != null)
+            J.$indexSet$ax(attrs0, "_comObjectId", refId);
+          comObjectRefMap.$indexSet(0, id0, attrs0);
+        }
+      } catch (exception) {
+      }
+    },
+    _lookupComObjectDef$4(instanceRefId, appProgramPrefix, comObjectDefs, comObjectRefMap) {
+      var refAttrs, comObjectId, baseAttrs, t2, entry,
+        _s12_ = "_comObjectId",
+        t1 = type$.Map_of_String_and_Map_String_String;
+      t1._as(comObjectDefs);
+      t1._as(comObjectRefMap);
+      refAttrs = comObjectRefMap.$index(0, appProgramPrefix + "_" + instanceRefId);
+      if (refAttrs != null) {
+        comObjectId = refAttrs.$index(0, _s12_);
+        baseAttrs = comObjectId != null ? comObjectDefs.$index(0, comObjectId) : null;
+        if (baseAttrs != null) {
+          t1 = type$.String;
+          t1 = A.LinkedHashMap_LinkedHashMap$of(baseAttrs, t1, t1);
+          t1.addAll$1(0, refAttrs);
+          return t1;
+        }
+        return refAttrs;
+      }
+      for (t1 = new A.LinkedHashMapEntriesIterable(comObjectRefMap, A._instanceType(comObjectRefMap)._eval$1("LinkedHashMapEntriesIterable<1,2>")).get$iterator(0), t2 = "_" + instanceRefId; t1.moveNext$0();) {
+        entry = t1.__js_helper$_current;
+        if (B.JSString_methods.endsWith$1(entry.key, t2)) {
+          t1 = entry.value;
+          comObjectId = t1.$index(0, _s12_);
+          baseAttrs = comObjectId != null ? comObjectDefs.$index(0, comObjectId) : null;
+          if (baseAttrs != null) {
+            t2 = type$.String;
+            t2 = A.LinkedHashMap_LinkedHashMap(t2, t2);
+            t2.addAll$1(0, baseAttrs);
+            t2.addAll$1(0, t1);
+            return t2;
+          }
+          return t1;
+        }
+      }
+      for (t1 = new A.LinkedHashMapEntriesIterable(comObjectDefs, A._instanceType(comObjectDefs)._eval$1("LinkedHashMapEntriesIterable<1,2>")).get$iterator(0); t1.moveNext$0();) {
+        entry = t1.__js_helper$_current;
+        if (B.JSString_methods.endsWith$1(entry.key, t2))
+          return entry.value;
+      }
+      return null;
+    },
+    _flagValue$1(value) {
+      if (value == null)
+        return false;
+      return value === "Enabled" || value === "1" || value === "true";
+    },
+    _resolveGaLinks$2(links, installations) {
+      var t1, t2, gaIds, resolved, _i, gaId, t3, _i0, t4, t5, _i1, ga, t6;
+      type$.List_Installation._as(installations);
+      if (links == null || links.length === 0)
+        return A._setArrayType([], type$.JSArray_String);
+      t1 = type$.JSArray_String;
+      t2 = type$.WhereIterable_String;
+      gaIds = A.List_List$_of(new A.WhereIterable(A._setArrayType(links.split(" "), t1), type$.bool_Function_String._as(new A.KnxProjectParser__resolveGaLinks_closure()), t2), t2._eval$1("Iterable.E"));
+      resolved = A._setArrayType([], t1);
+      for (t1 = gaIds.length, _i = 0; _i < gaIds.length; gaIds.length === t1 || (0, A.throwConcurrentModificationError)(gaIds), ++_i) {
+        gaId = gaIds[_i];
+        for (t2 = installations.length, t3 = "_" + gaId, _i0 = 0; _i0 < installations.length; installations.length === t2 || (0, A.throwConcurrentModificationError)(installations), ++_i0)
+          for (t4 = installations[_i0].groupAddresses, t5 = t4.length, _i1 = 0; _i1 < t5; ++_i1) {
+            ga = t4[_i1];
+            t6 = ga.id;
+            if (B.JSString_methods.endsWith$1(t6, gaId) || B.JSString_methods.endsWith$1(t6, t3)) {
+              B.JSArray_methods.add$1(resolved, ga.get$formattedAddress());
+              break;
+            }
+          }
+      }
+      return resolved;
+    },
+    _enrichComObjectsInInstallations$3(installations, comObjectDefs, comObjectRefMap) {
+      var t1, t2, t3;
+      type$.List_Installation._as(installations);
+      t1 = type$.Map_of_String_and_Map_String_String;
+      t2 = A._arrayInstanceType(installations);
+      t3 = t2._eval$1("MappedListIterable<1,Installation>");
+      t1 = A.List_List$_of(new A.MappedListIterable(installations, t2._eval$1("Installation(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations_closure(this, t1._as(comObjectDefs), t1._as(comObjectRefMap), installations)), t3), t3._eval$1("ListIterable.E"));
+      return t1;
+    },
+    _enrichDeviceComObjects$4(device, comObjectDefs, comObjectRefMap, installations) {
+      var h2pRefId, h2pRefId0, mfgMatch, mfgPrefix, t2, t3, enrichedComObjects,
+        t1 = type$.Map_of_String_and_Map_String_String;
+      t1._as(comObjectDefs);
+      t1._as(comObjectRefMap);
+      type$.List_Installation._as(installations);
+      h2pRefId = device.hardware2ProgramRefId;
+      h2pRefId0 = h2pRefId == null ? "" : h2pRefId;
+      mfgMatch = A.RegExp_RegExp("^(M-[^_]+)").firstMatch$1(h2pRefId0);
+      if (mfgMatch == null)
+        mfgPrefix = null;
+      else {
+        t1 = mfgMatch._match;
+        if (1 >= t1.length)
+          return A.ioore(t1, 1);
+        t1 = t1[1];
+        mfgPrefix = t1;
+      }
+      if (mfgPrefix == null)
+        mfgPrefix = "";
+      t1 = device.comObjectInstanceRefs;
+      t2 = A._arrayInstanceType(t1);
+      t3 = t2._eval$1("MappedListIterable<1,ComObjectInstanceRef>");
+      enrichedComObjects = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("ComObjectInstanceRef(1)")._as(new A.KnxProjectParser__enrichDeviceComObjects_closure(this, comObjectDefs, mfgPrefix, comObjectRefMap, installations)), t3), t3._eval$1("ListIterable.E"));
+      return new A.DeviceInstance(device.id, device.address, device.name, device.description, device.comment, device.productName, device.productRefId, h2pRefId, device.puid, enrichedComObjects, device.securityToolKey);
     }
   };
   A.KnxProjectParser__parseInstallationXml_closure.prototype = {
@@ -17574,7 +17871,184 @@
       type$.Installation._as(installation);
       return new A.Installation(installation.name, installation.bcuKey, installation.defaultLine, installation.topology.copyWithProductCatalog$1(type$.Map_String_String._as(this.productCatalog)), installation.groupAddresses, installation.groupRanges, installation.locations);
     },
-    $signature: 76
+    $signature: 27
+  };
+  A.KnxProjectParser__resolveGaLinks_closure.prototype = {
+    call$1(s) {
+      return A._asString(s).length !== 0;
+    },
+    $signature: 6
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations_closure.prototype = {
+    call$1(inst) {
+      var t1, t2, t3, _this = this;
+      type$.Installation._as(inst);
+      t1 = inst.topology.areas;
+      t2 = A._arrayInstanceType(t1);
+      t3 = t2._eval$1("MappedListIterable<1,Area>");
+      t1 = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("Area(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations__closure(_this.$this, _this.comObjectDefs, _this.comObjectRefMap, _this.installations)), t3), t3._eval$1("ListIterable.E"));
+      return new A.Installation(inst.name, inst.bcuKey, inst.defaultLine, new A.Topology(t1), inst.groupAddresses, inst.groupRanges, inst.locations);
+    },
+    $signature: 27
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations__closure.prototype = {
+    call$1(area) {
+      var t1, t2, t3, _this = this;
+      type$.Area._as(area);
+      t1 = area.lines;
+      t2 = A._arrayInstanceType(t1);
+      t3 = t2._eval$1("MappedListIterable<1,Line>");
+      t1 = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("Line(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations___closure(_this.$this, _this.comObjectDefs, _this.comObjectRefMap, _this.installations)), t3), t3._eval$1("ListIterable.E"));
+      return new A.Area(area.id, area.address, area.puid, area.name, t1);
+    },
+    $signature: 22
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations___closure.prototype = {
+    call$1(line) {
+      var t1, t2, t3, t4, t5, t6, t7, t8, _this = this;
+      type$.Line._as(line);
+      t1 = line.segments;
+      t2 = _this.$this;
+      t3 = _this.comObjectDefs;
+      t4 = _this.comObjectRefMap;
+      t5 = _this.installations;
+      t6 = A._arrayInstanceType(t1);
+      t7 = t6._eval$1("MappedListIterable<1,Segment>");
+      t1 = A.List_List$_of(new A.MappedListIterable(t1, t6._eval$1("Segment(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations____closure(t2, t3, t4, t5)), t7), t7._eval$1("ListIterable.E"));
+      t6 = line.devices;
+      t7 = A._arrayInstanceType(t6);
+      t8 = t7._eval$1("MappedListIterable<1,DeviceInstance>");
+      t2 = A.List_List$_of(new A.MappedListIterable(t6, t7._eval$1("DeviceInstance(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations____closure0(t2, t3, t4, t5)), t8), t8._eval$1("ListIterable.E"));
+      return new A.Line(line.id, line.address, line.puid, line.name, t1, t2);
+    },
+    $signature: 23
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations____closure.prototype = {
+    call$1(seg) {
+      var t1, t2, t3, _this = this;
+      type$.Segment._as(seg);
+      t1 = seg.devices;
+      t2 = A._arrayInstanceType(t1);
+      t3 = t2._eval$1("MappedListIterable<1,DeviceInstance>");
+      t1 = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("DeviceInstance(1)")._as(new A.KnxProjectParser__enrichComObjectsInInstallations_____closure(_this.$this, _this.comObjectDefs, _this.comObjectRefMap, _this.installations)), t3), t3._eval$1("ListIterable.E"));
+      return new A.Segment(seg.id, seg.number, seg.mediumTypeRefId, seg.puid, t1);
+    },
+    $signature: 31
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations_____closure.prototype = {
+    call$1(d) {
+      var _this = this;
+      return _this.$this._enrichDeviceComObjects$4(type$.DeviceInstance._as(d), _this.comObjectDefs, _this.comObjectRefMap, _this.installations);
+    },
+    $signature: 7
+  };
+  A.KnxProjectParser__enrichComObjectsInInstallations____closure0.prototype = {
+    call$1(d) {
+      var _this = this;
+      return _this.$this._enrichDeviceComObjects$4(type$.DeviceInstance._as(d), _this.comObjectDefs, _this.comObjectRefMap, _this.installations);
+    },
+    $signature: 7
+  };
+  A.KnxProjectParser__enrichDeviceComObjects_closure.prototype = {
+    call$1(co) {
+      var t1, t2, strippedRefId, t3, t4, t5, t6, t7, def, t8, appMatch, _i, suffix, t9, t10, entry, comObjId, baseDef, resolvedGAs, t11, t12, t13, _this = this, _null = null;
+      type$.ComObjectInstanceRef._as(co);
+      t1 = co.refId;
+      if (t1 == null)
+        return co;
+      t2 = A.RegExp_RegExp("_M-\\d+_MI-\\d+");
+      strippedRefId = A.stringReplaceAllUnchecked(t1, t2, "");
+      for (t2 = _this.comObjectDefs, t3 = new A.LinkedHashMapKeyIterator(t2, t2._modifications, t2._first, A._instanceType(t2)._eval$1("LinkedHashMapKeyIterator<1>")), t4 = _this.mfgPrefix, t5 = _this.$this, t6 = _this.comObjectRefMap, t7 = strippedRefId !== t1, def = _null; t3.moveNext$0();) {
+        t8 = t3.__js_helper$_current;
+        if (B.JSString_methods.startsWith$1(t8, t4)) {
+          appMatch = A.RegExp_RegExp("^(M-[^_]+_A-[^_]+)").firstMatch$1(t8);
+          if (appMatch != null) {
+            t8 = appMatch._match;
+            if (1 >= t8.length)
+              return A.ioore(t8, 1);
+            t8 = t8[1];
+            t8.toString;
+            def = t5._lookupComObjectDef$4(t1, t8, t2, t6);
+            if (def == null && t7)
+              def = t5._lookupComObjectDef$4(strippedRefId, t8, t2, t6);
+            if (def != null)
+              break;
+          }
+        }
+      }
+      if (def == null) {
+        t3 = A._setArrayType([t1], type$.JSArray_String);
+        if (t7)
+          t3.push(strippedRefId);
+        t4 = t3.length;
+        t7 = A._instanceType(t6)._eval$1("LinkedHashMapEntryIterator<1,2>");
+        t8 = type$.String;
+        _i = 0;
+        for (; _i < t3.length; t3.length === t4 || (0, A.throwConcurrentModificationError)(t3), ++_i) {
+          suffix = t3[_i];
+          for (t9 = new A.LinkedHashMapEntryIterator(t6, t6._modifications, t6._first, t7), t10 = "_" + suffix; t9.moveNext$0();) {
+            entry = t9.__js_helper$_current;
+            if (B.JSString_methods.endsWith$1(entry.key, t10)) {
+              def = entry.value;
+              comObjId = def.$index(0, "_comObjectId");
+              baseDef = comObjId != null ? t2.$index(0, comObjId) : _null;
+              if (baseDef != null) {
+                t9 = A.LinkedHashMap_LinkedHashMap(t8, t8);
+                t9.addAll$1(0, baseDef);
+                t9.addAll$1(0, def);
+                def = t9;
+              }
+              break;
+            }
+          }
+          if (def != null)
+            break;
+        }
+      }
+      t2 = co.links;
+      resolvedGAs = t5._resolveGaLinks$2(t2, _this.installations);
+      t3 = def == null;
+      if (t3 && resolvedGAs.length === 0)
+        return co;
+      t4 = t3 ? _null : def.$index(0, "Name");
+      t6 = t3 ? _null : def.$index(0, "Text");
+      t7 = t3 ? _null : def.$index(0, "Number");
+      t7 = A.Primitives_parseInt(t7 == null ? "" : t7, _null);
+      t8 = t3 ? _null : def.$index(0, "FunctionText");
+      t9 = t3 ? _null : def.$index(0, "ObjectSize");
+      t10 = t3 ? _null : def.$index(0, "DatapointType");
+      t3 = !t3;
+      t11 = t3 ? t5._flagValue$1(def.$index(0, "ReadFlag")) : _null;
+      t12 = t3 ? t5._flagValue$1(def.$index(0, "WriteFlag")) : _null;
+      t13 = t3 ? t5._flagValue$1(def.$index(0, "TransmitFlag")) : _null;
+      t3 = t3 ? t5._flagValue$1(def.$index(0, "UpdateFlag")) : _null;
+      t5 = resolvedGAs.length !== 0 ? resolvedGAs : _null;
+      type$.nullable_List_String._as(t5);
+      if (t4 == null)
+        t4 = co.name;
+      if (t6 == null)
+        t6 = co.description;
+      if (t7 == null)
+        t7 = co.number;
+      if (t8 == null)
+        t8 = co.functionText;
+      if (t9 == null)
+        t9 = co.objectSize;
+      if (t10 == null)
+        t10 = co.datapointType;
+      if (t11 == null)
+        t11 = co.readFlag;
+      if (t12 == null)
+        t12 = co.writeFlag;
+      if (t13 == null)
+        t13 = co.transmitFlag;
+      if (t3 == null)
+        t3 = co.updateFlag;
+      if (t5 == null)
+        t5 = co.groupAddresses;
+      return new A.ComObjectInstanceRef(t1, co.text, t2, co.channelId, t4, t6, t7, t8, t9, t10, t11, t12, t13, t3, t5);
+    },
+    $signature: 77
   };
   A.Context.prototype = {
     toString$0(_) {
@@ -17757,7 +18231,7 @@
       var t1 = this.parser.parseOn$1(new A.Context(A._asString(each), 0));
       return t1.get$value(t1);
     },
-    $signature: 77
+    $signature: 78
   };
   A._createParser_closure.prototype = {
     call$1(element) {
@@ -17769,7 +18243,7 @@
       codes = t1 ? new A.Runes(element) : new A.CodeUnits(element);
       return new A.RangeCharPredicate(t2, codes.get$single(codes));
     },
-    $signature: 78
+    $signature: 79
   };
   A._createParser_closure0.prototype = {
     call$3(start, __wc0_formal, $stop) {
@@ -17783,7 +18257,7 @@
       codes = t1 ? new A.Runes($stop) : new A.CodeUnits($stop);
       return new A.RangeCharPredicate(t2, codes.get$single(codes));
     },
-    $signature: 79
+    $signature: 80
   };
   A.CharacterPredicate.prototype = {
     toString$0(_) {
@@ -17908,14 +18382,14 @@
         return "\\x" + B.JSString_methods.padLeft$2(B.JSInt_methods.toRadixString$1(code, 16), 2, "0");
       return A.Primitives_stringFromCharCode(code);
     },
-    $signature: 24
+    $signature: 28
   };
   A.optimizedString_closure.prototype = {
     call$1(value) {
       A._asInt(value);
       return new A.RangeCharPredicate(value, value);
     },
-    $signature: 81
+    $signature: 82
   };
   A.optimizedRanges_closure.prototype = {
     call$2(first, second) {
@@ -17927,7 +18401,7 @@
       t2 = second.start;
       return t1 !== t2 ? t1 - t2 : first.stop - second.stop;
     },
-    $signature: 82
+    $signature: 83
   };
   A.optimizedRanges_closure0.prototype = {
     call$2(current, range) {
@@ -17935,7 +18409,7 @@
       type$.RangeCharPredicate._as(range);
       return current + (range.stop - range.start + 1);
     },
-    $signature: 83
+    $signature: 84
   };
   A.ChoiceParser.prototype = {
     parseOn$1(context) {
@@ -18491,13 +18965,13 @@
     call$1(value) {
       return A.equalsIgnoreAsciiCase(this.string, value);
     },
-    $signature: 8
+    $signature: 6
   };
   A.string_closure0.prototype = {
     call$1(value) {
       return this.string === value;
     },
-    $signature: 8
+    $signature: 6
   };
   A.UnicodeCharacterParser.prototype = {
     parseOn$1(context) {
@@ -19302,7 +19776,7 @@
     call$1(rune) {
       return "&#x" + B.JSInt_methods.toRadixString$1(A._asInt(rune), 16).toUpperCase() + ";";
     },
-    $signature: 24
+    $signature: 28
   };
   A.XmlEntityMapping.prototype = {
     decode$1(_, input) {
@@ -19623,7 +20097,7 @@
       type$.XmlAttribute._as(each);
       return A.XmlAttribute$(each.name.copy$0(), each.value, each.attributeType);
     },
-    $signature: 14
+    $signature: 13
   };
   A._XmlDeclaration_XmlNode_XmlHasParent.prototype = {};
   A._XmlDeclaration_XmlNode_XmlHasParent_XmlHasAttributes.prototype = {};
@@ -19680,7 +20154,7 @@
     call$1(each) {
       return type$.XmlNode._as(each).copy$0();
     },
-    $signature: 25
+    $signature: 29
   };
   A._XmlDocument_XmlNode_XmlHasChildren.prototype = {};
   A.XmlElement.prototype = {
@@ -19709,13 +20183,13 @@
       type$.XmlAttribute._as(each);
       return A.XmlAttribute$(each.name.copy$0(), each.value, each.attributeType);
     },
-    $signature: 14
+    $signature: 13
   };
   A.XmlElement_copy_closure0.prototype = {
     call$1(each) {
       return type$.XmlNode._as(each).copy$0();
     },
-    $signature: 25
+    $signature: 29
   };
   A._XmlElement_XmlNode_XmlHasName.prototype = {};
   A._XmlElement_XmlNode_XmlHasName_XmlHasParent.prototype = {};
@@ -19821,14 +20295,14 @@
       type$.XmlHasName._as(named);
       return true;
     },
-    $signature: 26
+    $signature: 30
   };
   A.createNameMatcher_closure0.prototype = {
     call$1(named) {
       type$.XmlHasName._as(named);
       return named.get$name(named).get$qualified() === this.name;
     },
-    $signature: 26
+    $signature: 30
   };
   A.XmlNodeList.prototype = {
     add$1(_, value) {
@@ -19906,6 +20380,9 @@
     copy$0() {
       return new A.XmlPrefixName(this.prefix, this.local, this.qualified, null);
     },
+    get$local() {
+      return this.local;
+    },
     get$qualified() {
       return this.qualified;
     }
@@ -19919,6 +20396,9 @@
     },
     copy$0() {
       return new A.XmlSimpleName(this.local, null);
+    },
+    get$local() {
+      return this.local;
     }
   };
   A.XmlVisitor.prototype = {};
@@ -20226,7 +20706,7 @@
       type$.XmlEventAttribute._as(attribute);
       return A.XmlAttribute$(A.XmlName_XmlName$fromString(attribute.name), attribute.value, attribute.attributeType);
     },
-    $signature: 87
+    $signature: 88
   };
   A.__XmlNodeDecoderSink_Object_XmlEventVisitor.prototype = {};
   A.XmlEvent.prototype = {
@@ -20572,7 +21052,7 @@
       var _null = null;
       return new A.XmlRawTextEvent(A._asString(each), this.$this.entityMapping, _null, _null, _null, _null);
     },
-    $signature: 103
+    $signature: 104
   };
   A.XmlEventParser_startElement_closure.prototype = {
     call$5(__wc0_formal, nameToken, attributes, __wc1_formal, closeElement) {
@@ -20583,7 +21063,7 @@
       A._asString(__wc1_formal);
       return new A.XmlStartElementEvent(nameToken, attributes, A._asString(closeElement) === "/>", _null, _null, _null, _null);
     },
-    $signature: 104
+    $signature: 105
   };
   A.XmlEventParser_attribute_closure.prototype = {
     call$3(__wc0_formal, $name, attribute) {
@@ -20592,7 +21072,7 @@
       type$.Record_2_String_and_XmlAttributeType._as(attribute);
       return new A.XmlEventAttribute($name, this.$this.entityMapping.decode$1(0, attribute._0), attribute._1, null);
     },
-    $signature: 105
+    $signature: 106
   };
   A.XmlEventParser_attributeAssignment_closure.prototype = {
     call$4(__wc0_formal, __wc1_formal, __wc2_formal, value) {
@@ -20601,7 +21081,7 @@
       A._asString(__wc2_formal);
       return type$.Record_2_String_and_XmlAttributeType._as(value);
     },
-    $signature: 106
+    $signature: 107
   };
   A.XmlEventParser_attributeValueDoubleQuote_closure.prototype = {
     call$3(__wc0_formal, value, __wc1_formal) {
@@ -20610,7 +21090,7 @@
       A._asString(__wc1_formal);
       return new A._Record_2(value, B.XmlAttributeType_BDu);
     },
-    $signature: 30
+    $signature: 34
   };
   A.XmlEventParser_attributeValueSingleQuote_closure.prototype = {
     call$3(__wc0_formal, value, __wc1_formal) {
@@ -20619,13 +21099,13 @@
       A._asString(__wc1_formal);
       return new A._Record_2(value, B.XmlAttributeType_Ugh);
     },
-    $signature: 30
+    $signature: 34
   };
   A.XmlEventParser_attributeValueNoQuote_closure.prototype = {
     call$1(value) {
       return new A._Record_2(A._asString(value), B.XmlAttributeType_BDu);
     },
-    $signature: 108
+    $signature: 109
   };
   A.XmlEventParser_endElement_closure.prototype = {
     call$4(__wc0_formal, $name, __wc1_formal, __wc2_formal) {
@@ -20636,7 +21116,7 @@
       A._asString(__wc2_formal);
       return new A.XmlEndElementEvent($name, _null, _null, _null, _null);
     },
-    $signature: 109
+    $signature: 110
   };
   A.XmlEventParser_comment_closure.prototype = {
     call$3(__wc0_formal, text, __wc1_formal) {
@@ -20646,7 +21126,7 @@
       A._asString(__wc1_formal);
       return new A.XmlCommentEvent(text, _null, _null, _null, _null);
     },
-    $signature: 110
+    $signature: 111
   };
   A.XmlEventParser_cdata_closure.prototype = {
     call$3(__wc0_formal, text, __wc1_formal) {
@@ -20656,7 +21136,7 @@
       A._asString(__wc1_formal);
       return new A.XmlCDATAEvent(text, _null, _null, _null, _null);
     },
-    $signature: 111
+    $signature: 112
   };
   A.XmlEventParser_declaration_closure.prototype = {
     call$4(__wc0_formal, attributes, __wc1_formal, __wc2_formal) {
@@ -20667,14 +21147,14 @@
       A._asString(__wc2_formal);
       return new A.XmlDeclarationEvent(attributes, _null, _null, _null, _null);
     },
-    $signature: 112
+    $signature: 113
   };
   A.XmlEventParser_processing_closure.prototype = {
     call$2(__wc0_formal, text) {
       A._asString(__wc0_formal);
       return A._asString(text);
     },
-    $signature: 113
+    $signature: 114
   };
   A.XmlEventParser_processing_closure0.prototype = {
     call$4(__wc1_formal, target, text, __wc2_formal) {
@@ -20685,7 +21165,7 @@
       A._asString(__wc2_formal);
       return new A.XmlProcessingEvent(target, text, _null, _null, _null, _null);
     },
-    $signature: 114
+    $signature: 115
   };
   A.XmlEventParser_doctype_closure.prototype = {
     call$8(__wc0_formal, __wc1_formal, $name, externalId, __wc2_formal, internalSubset, __wc3_formal, __wc4_formal) {
@@ -20700,7 +21180,7 @@
       A._asString(__wc4_formal);
       return new A.XmlDoctypeEvent($name, externalId, internalSubset, _null, _null, _null, _null);
     },
-    $signature: 115
+    $signature: 116
   };
   A.XmlEventParser_doctypeExternalIdSystem_closure.prototype = {
     call$3(__wc0_formal, __wc1_formal, attribute) {
@@ -20709,7 +21189,7 @@
       type$.Record_2_String_and_XmlAttributeType._as(attribute);
       return new A.DtdExternalId(null, null, attribute._0, attribute._1);
     },
-    $signature: 116
+    $signature: 117
   };
   A.XmlEventParser_doctypeExternalIdPublic_closure.prototype = {
     call$5(__wc0_formal, __wc1_formal, publicAttribute, __wc2_formal, systemAttribute) {
@@ -20722,7 +21202,7 @@
       t1._as(systemAttribute);
       return new A.DtdExternalId(publicAttribute._0, publicAttribute._1, systemAttribute._0, systemAttribute._1);
     },
-    $signature: 117
+    $signature: 118
   };
   A.XmlEventParser_doctypeIntSubset_closure.prototype = {
     call$3(__wc0_formal, contents, __wc1_formal) {
@@ -20731,13 +21211,13 @@
       A._asString(__wc1_formal);
       return contents;
     },
-    $signature: 118
+    $signature: 119
   };
   A.eventParserCache_closure.prototype = {
     call$1(entityMapping) {
       return A.resolve(new A.ReferenceParser(new A.XmlEventParser(type$.XmlEntityMapping._as(entityMapping)).get$event(), B.List_empty1, type$.ReferenceParser_XmlEvent), type$.XmlEvent);
     },
-    $signature: 119
+    $signature: 120
   };
   A.ConversionSink.prototype = {$isSink: 1};
   A.XmlEventAttribute.prototype = {
@@ -20866,7 +21346,7 @@
       } else
         t4.set$text(t3, "");
     },
-    $signature: 13
+    $signature: 35
   };
   A.main_closure0.prototype = {
     call$1(_) {
@@ -20923,7 +21403,7 @@
       });
       return A._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 122
+    $signature: 123
   };
   A.main__closure.prototype = {
     call$1(_) {
@@ -20966,7 +21446,7 @@
         B.ButtonElement_methods.set$text(t1, "Parse sang JSON");
       }
     },
-    $signature: 32
+    $signature: 36
   };
   A.main__closure0.prototype = {
     call$1(_) {
@@ -20978,7 +21458,7 @@
       t1.disabled = false;
       B.ButtonElement_methods.set$text(t1, "Parse sang JSON");
     },
-    $signature: 32
+    $signature: 36
   };
   A.main_closure1.prototype = {
     call$1(_) {
@@ -21092,37 +21572,37 @@
       _instance_1_u = hunkHelpers._instance_1u,
       _instance_0_u = hunkHelpers._instance_0u,
       _instance_0_i = hunkHelpers._instance_0i;
-    _static_2(J, "_interceptors_JSArray__compareAny$closure", "JSArray__compareAny", 124);
-    _instance_1_i(J.JSArray.prototype, "get$addAll", "addAll$1", 17);
-    _static_1(A, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 9);
-    _static_1(A, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 9);
-    _static_1(A, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 9);
+    _static_2(J, "_interceptors_JSArray__compareAny$closure", "JSArray__compareAny", 125);
+    _instance_1_i(J.JSArray.prototype, "get$addAll", "addAll$1", 16);
+    _static_1(A, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 10);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 10);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 10);
     _static_0(A, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 0);
-    _static_1(A, "convert___defaultToEncodable$closure", "_defaultToEncodable", 27);
-    _instance_1_u(A.StringBuffer.prototype, "get$write", "write$1", 17);
-    _static_1(A, "default_mapping___textReplace$closure", "_textReplace", 7);
-    _static_1(A, "default_mapping___singeQuoteAttributeReplace$closure", "_singeQuoteAttributeReplace", 7);
-    _static_1(A, "default_mapping___doubleQuoteAttributeReplace$closure", "_doubleQuoteAttributeReplace", 7);
+    _static_1(A, "convert___defaultToEncodable$closure", "_defaultToEncodable", 26);
+    _instance_1_u(A.StringBuffer.prototype, "get$write", "write$1", 16);
+    _static_1(A, "default_mapping___textReplace$closure", "_textReplace", 9);
+    _static_1(A, "default_mapping___singeQuoteAttributeReplace$closure", "_singeQuoteAttributeReplace", 9);
+    _static_1(A, "default_mapping___doubleQuoteAttributeReplace$closure", "_doubleQuoteAttributeReplace", 9);
     var _;
-    _instance_0_u(_ = A.XmlEventParser.prototype, "get$event", "event$0", 88);
-    _instance_0_u(_, "get$characterData", "characterData$0", 89);
-    _instance_0_u(_, "get$startElement", "startElement$0", 90);
-    _instance_0_i(_, "get$attributes", "attributes$0", 91);
-    _instance_0_u(_, "get$attribute", "attribute$0", 92);
+    _instance_0_u(_ = A.XmlEventParser.prototype, "get$event", "event$0", 89);
+    _instance_0_u(_, "get$characterData", "characterData$0", 90);
+    _instance_0_u(_, "get$startElement", "startElement$0", 91);
+    _instance_0_i(_, "get$attributes", "attributes$0", 92);
+    _instance_0_u(_, "get$attribute", "attribute$0", 93);
     _instance_0_u(_, "get$attributeAssignment", "attributeAssignment$0", 4);
     _instance_0_u(_, "get$attributeValue", "attributeValue$0", 4);
     _instance_0_u(_, "get$attributeValueDoubleQuote", "attributeValueDoubleQuote$0", 4);
     _instance_0_u(_, "get$attributeValueSingleQuote", "attributeValueSingleQuote$0", 4);
     _instance_0_u(_, "get$attributeValueNoQuote", "attributeValueNoQuote$0", 4);
-    _instance_0_i(_, "get$endElement", "endElement$0", 94);
-    _instance_0_u(_, "get$comment", "comment$0", 95);
-    _instance_0_u(_, "get$cdata", "cdata$0", 96);
-    _instance_0_u(_, "get$declaration", "declaration$0", 97);
-    _instance_0_u(_, "get$processing", "processing$0", 98);
-    _instance_0_u(_, "get$doctype", "doctype$0", 99);
-    _instance_0_u(_, "get$doctypeExternalId", "doctypeExternalId$0", 11);
-    _instance_0_u(_, "get$doctypeExternalIdSystem", "doctypeExternalIdSystem$0", 11);
-    _instance_0_u(_, "get$doctypeExternalIdPublic", "doctypeExternalIdPublic$0", 11);
+    _instance_0_i(_, "get$endElement", "endElement$0", 95);
+    _instance_0_u(_, "get$comment", "comment$0", 96);
+    _instance_0_u(_, "get$cdata", "cdata$0", 97);
+    _instance_0_u(_, "get$declaration", "declaration$0", 98);
+    _instance_0_u(_, "get$processing", "processing$0", 99);
+    _instance_0_u(_, "get$doctype", "doctype$0", 100);
+    _instance_0_u(_, "get$doctypeExternalId", "doctypeExternalId$0", 8);
+    _instance_0_u(_, "get$doctypeExternalIdSystem", "doctypeExternalIdSystem$0", 8);
+    _instance_0_u(_, "get$doctypeExternalIdPublic", "doctypeExternalIdPublic$0", 8);
     _instance_0_u(_, "get$doctypeIntSubset", "doctypeIntSubset$0", 1);
     _instance_0_u(_, "get$doctypeElementDecl", "doctypeElementDecl$0", 5);
     _instance_0_u(_, "get$doctypeAttlistDecl", "doctypeAttlistDecl$0", 5);
@@ -21134,10 +21614,10 @@
     _instance_0_u(_, "get$nameToken", "nameToken$0", 1);
     _instance_0_u(_, "get$nameStartChar", "nameStartChar$0", 1);
     _instance_0_u(_, "get$nameChar", "nameChar$0", 1);
-    _instance_1_u(A.XmlEventVisitor.prototype, "get$visit", "visit$1", 120);
-    _static_2(A, "failure_joiner__selectFirst$closure", "selectFirst", 10);
-    _static_2(A, "failure_joiner__selectLast$closure", "selectLast", 10);
-    _static_2(A, "failure_joiner__selectFarthest$closure", "selectFarthest", 10);
+    _instance_1_u(A.XmlEventVisitor.prototype, "get$visit", "visit$1", 121);
+    _static_2(A, "failure_joiner__selectFirst$closure", "selectFirst", 11);
+    _static_2(A, "failure_joiner__selectLast$closure", "selectLast", 11);
+    _static_2(A, "failure_joiner__selectFarthest$closure", "selectFarthest", 11);
   })();
   (function inheritance() {
     var _mixin = hunkHelpers.mixin,
@@ -21172,7 +21652,7 @@
     _inheritMany(A.ConstantMap, [A.ConstantStringMap, A.GeneralConstantMap]);
     _inheritMany(A.SetBase, [A.ConstantSet, A._SetBase]);
     _inherit(A.GeneralConstantSet, A.ConstantSet);
-    _inheritMany(A.Closure, [A.Closure2Args, A.Closure0Args, A.TearOffClosure, A.initHooks_closure, A.initHooks_closure1, A._AsyncRun__initializeScheduleImmediate_internalCallback, A._AsyncRun__initializeScheduleImmediate_closure, A._awaitOnObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure, A.Stream_length_closure, A._RootZone_bindUnaryCallbackGuarded_closure, A.MapBase_entries_closure, A.DateTime_parse_parseIntOrZero, A.DateTime_parse_parseMilliAndMicroseconds, A._EventStreamSubscription_closure, A.FilteredElementList__iterable_closure, A.FilteredElementList__iterable_closure0, A.FilteredElementList_removeRange_closure, A.DatapointType_DatapointType$fromXml_closure, A.DatapointType_toJson_closure, A.DeviceInstance_DeviceInstance$fromXml_closure, A.DeviceInstance_toJson_closure, A.Installation__parseTopology_closure, A.Installation__parseGroupAddresses_parseGroupRanges, A.Installation__parseLocations_parseSpaces, A.Installation_toJson_closure, A.Installation_toJson_closure0, A.Installation_toJson_closure1, A.KnxFlatProject_toJson_closure, A.KnxFlatProject_toJson_closure0, A.KnxFlatProject_toJson_closure1, A.KnxFlatProject_toJson_closure2, A.KnxFlatProject_toJson_closure3, A.KnxFlatProject_toJson_closure4, A.KnxFlatProject_toJson_closure5, A.KnxFlatProject_toJson_closure6, A.KnxFlatProject_toJson_closure7, A.KnxRoom_toJson_closure, A.KnxDevice_toJson_closure, A.KnxGroupAddress_toJson_closure, A.KnxSecureKeys_toJson_closure, A.KnxSecureKeys_toJson_closure0, A.KnxProject_toJson_closure, A.KnxProject_toJson_closure0, A.KnxProject_toFlat_closure, A.KnxProject_toFlat_closure0, A.KnxProject_toFlat_closure1, A.KnxProject_toFlat_closure2, A.KnxProject_toFlat_closure3, A.KnxProject_toFlat_closure4, A.KnxProject_toFlat__closure3, A.KnxProject_toFlat__closure4, A.KnxProject_toFlat_closure5, A.KnxProject_toFlat__closure1, A.KnxProject_toFlat__closure2, A.KnxProject_toFlat_closure6, A.KnxProject_toFlat__closure, A.KnxProject_toFlat__closure0, A.KnxProject_toFlat_closure7, A.KnxProject_toFlat_closure9, A.KnxProject_toFlat_closure10, A.KnxProject_toFlat_closure11, A.KnxProject_toFlat_closure12, A.KnxProject_toFlat_closure13, A.KnxProject_toFlat_closure14, A.KnxProject_toFlat_closure15, A.Location_Location$fromXml_closure, A.Location_Location$fromXml_closure0, A.Topology_toJson_closure, A.Topology_copyWithProductCatalog_closure, A.Area_Area$fromXml_closure, A.Area_toJson_closure, A.Area_copyWithProductCatalog_closure, A.Line_Line$fromXml_closure, A.Line_Line$fromXml_closure0, A.Line_Line$fromXml_closure1, A.Line_toJson_closure, A.Line_toJson_closure0, A.Line_copyWithProductCatalog_closure, A.Line_copyWithProductCatalog_closure0, A.Segment_Segment$fromXml_closure, A.Segment_toJson_closure, A.Segment_copyWithProductCatalog_closure, A.KnxProjectParser__parseInstallationXml_closure, A.KnxProjectParser__parseDatapointTypes_closure, A.KnxProjectParser__mergeProductNamesIntoInstallations_closure, A.pattern_closure, A._createParser_closure, A._createParser_closure0, A.toReadableString_closure, A.optimizedString_closure, A.RecordParserExtension2_map2_closure, A.RecordParserExtension3_map3_closure, A.RecordParserExtension4_map4_closure, A.RecordParserExtension5_map5_closure, A.RecordParserExtension8_map8_closure, A.string_closure, A.string_closure0, A._asNumericCharacterReferences_closure, A.XmlDeclaration_copy_closure, A.XmlDocument_copy_closure, A.XmlElement_copy_closure, A.XmlElement_copy_closure0, A.createNameMatcher_closure, A.createNameMatcher_closure0, A.XmlNodeList__expandFragment_closure, A._XmlNodeDecoderSink_convertAttributes_closure, A.XmlEventParser_characterData_closure, A.XmlEventParser_startElement_closure, A.XmlEventParser_attribute_closure, A.XmlEventParser_attributeAssignment_closure, A.XmlEventParser_attributeValueDoubleQuote_closure, A.XmlEventParser_attributeValueSingleQuote_closure, A.XmlEventParser_attributeValueNoQuote_closure, A.XmlEventParser_endElement_closure, A.XmlEventParser_comment_closure, A.XmlEventParser_cdata_closure, A.XmlEventParser_declaration_closure, A.XmlEventParser_processing_closure0, A.XmlEventParser_doctype_closure, A.XmlEventParser_doctypeExternalIdSystem_closure, A.XmlEventParser_doctypeExternalIdPublic_closure, A.XmlEventParser_doctypeIntSubset_closure, A.eventParserCache_closure, A.buildJsonTree_closure, A.buildJsonTree_closure0, A.main_closure, A.main_closure0, A.main__closure, A.main__closure0, A.main_closure1, A.main_closure2, A.main_closure3]);
+    _inheritMany(A.Closure, [A.Closure2Args, A.Closure0Args, A.TearOffClosure, A.initHooks_closure, A.initHooks_closure1, A._AsyncRun__initializeScheduleImmediate_internalCallback, A._AsyncRun__initializeScheduleImmediate_closure, A._awaitOnObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure, A.Stream_length_closure, A._RootZone_bindUnaryCallbackGuarded_closure, A.MapBase_entries_closure, A.DateTime_parse_parseIntOrZero, A.DateTime_parse_parseMilliAndMicroseconds, A._EventStreamSubscription_closure, A.FilteredElementList__iterable_closure, A.FilteredElementList__iterable_closure0, A.FilteredElementList_removeRange_closure, A.DatapointType_DatapointType$fromXml_closure, A.DatapointType_toJson_closure, A.DeviceInstance_DeviceInstance$fromXml_closure, A.DeviceInstance_toJson_closure, A.Installation__parseTopology_closure, A.Installation__parseGroupAddresses_parseGroupRanges, A.Installation__parseLocations_parseSpaces, A.Installation_toJson_closure, A.Installation_toJson_closure0, A.Installation_toJson_closure1, A.KnxFlatProject_toJson_closure, A.KnxFlatProject_toJson_closure0, A.KnxFlatProject_toJson_closure1, A.KnxFlatProject_toJson_closure2, A.KnxFlatProject_toJson_closure3, A.KnxFlatProject_toJson_closure4, A.KnxFlatProject_toJson_closure5, A.KnxFlatProject_toJson_closure6, A.KnxFlatProject_toJson_closure7, A.KnxRoom_toJson_closure, A.KnxDevice_toJson_closure, A.KnxGroupAddress_toJson_closure, A.KnxSecureKeys_toJson_closure, A.KnxSecureKeys_toJson_closure0, A.KnxProject_toJson_closure, A.KnxProject_toJson_closure0, A.KnxProject_toFlat_closure, A.KnxProject_toFlat_closure0, A.KnxProject_toFlat_closure1, A.KnxProject_toFlat_closure2, A.KnxProject_toFlat_closure3, A.KnxProject_toFlat_closure4, A.KnxProject_toFlat__closure3, A.KnxProject_toFlat__closure4, A.KnxProject_toFlat_closure5, A.KnxProject_toFlat__closure1, A.KnxProject_toFlat__closure2, A.KnxProject_toFlat_closure6, A.KnxProject_toFlat__closure, A.KnxProject_toFlat__closure0, A.KnxProject_toFlat_closure7, A.KnxProject_toFlat_closure9, A.KnxProject_toFlat_closure10, A.KnxProject_toFlat_closure11, A.KnxProject_toFlat_closure12, A.KnxProject_toFlat_closure13, A.KnxProject_toFlat_closure14, A.KnxProject_toFlat_closure15, A.Location_Location$fromXml_closure, A.Location_Location$fromXml_closure0, A.Topology_toJson_closure, A.Topology_copyWithProductCatalog_closure, A.Area_Area$fromXml_closure, A.Area_toJson_closure, A.Area_copyWithProductCatalog_closure, A.Line_Line$fromXml_closure, A.Line_Line$fromXml_closure0, A.Line_Line$fromXml_closure1, A.Line_toJson_closure, A.Line_toJson_closure0, A.Line_copyWithProductCatalog_closure, A.Line_copyWithProductCatalog_closure0, A.Segment_Segment$fromXml_closure, A.Segment_toJson_closure, A.Segment_copyWithProductCatalog_closure, A.KnxProjectParser__parseInstallationXml_closure, A.KnxProjectParser__parseDatapointTypes_closure, A.KnxProjectParser__mergeProductNamesIntoInstallations_closure, A.KnxProjectParser__resolveGaLinks_closure, A.KnxProjectParser__enrichComObjectsInInstallations_closure, A.KnxProjectParser__enrichComObjectsInInstallations__closure, A.KnxProjectParser__enrichComObjectsInInstallations___closure, A.KnxProjectParser__enrichComObjectsInInstallations____closure, A.KnxProjectParser__enrichComObjectsInInstallations_____closure, A.KnxProjectParser__enrichComObjectsInInstallations____closure0, A.KnxProjectParser__enrichDeviceComObjects_closure, A.pattern_closure, A._createParser_closure, A._createParser_closure0, A.toReadableString_closure, A.optimizedString_closure, A.RecordParserExtension2_map2_closure, A.RecordParserExtension3_map3_closure, A.RecordParserExtension4_map4_closure, A.RecordParserExtension5_map5_closure, A.RecordParserExtension8_map8_closure, A.string_closure, A.string_closure0, A._asNumericCharacterReferences_closure, A.XmlDeclaration_copy_closure, A.XmlDocument_copy_closure, A.XmlElement_copy_closure, A.XmlElement_copy_closure0, A.createNameMatcher_closure, A.createNameMatcher_closure0, A.XmlNodeList__expandFragment_closure, A._XmlNodeDecoderSink_convertAttributes_closure, A.XmlEventParser_characterData_closure, A.XmlEventParser_startElement_closure, A.XmlEventParser_attribute_closure, A.XmlEventParser_attributeAssignment_closure, A.XmlEventParser_attributeValueDoubleQuote_closure, A.XmlEventParser_attributeValueSingleQuote_closure, A.XmlEventParser_attributeValueNoQuote_closure, A.XmlEventParser_endElement_closure, A.XmlEventParser_comment_closure, A.XmlEventParser_cdata_closure, A.XmlEventParser_declaration_closure, A.XmlEventParser_processing_closure0, A.XmlEventParser_doctype_closure, A.XmlEventParser_doctypeExternalIdSystem_closure, A.XmlEventParser_doctypeExternalIdPublic_closure, A.XmlEventParser_doctypeIntSubset_closure, A.eventParserCache_closure, A.buildJsonTree_closure, A.buildJsonTree_closure0, A.main_closure, A.main_closure0, A.main__closure, A.main__closure0, A.main_closure1, A.main_closure2, A.main_closure3]);
     _inheritMany(A.Closure2Args, [A.Primitives_functionNoSuchMethod_closure, A.JsLinkedHashMap_addAll_closure, A.initHooks_closure0, A._awaitOnObject_closure0, A._wrapJsFunctionForAsync_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure0, A.MapBase_mapToString_closure, A._JsonStringifier_writeMap_closure, A._JsonPrettyPrintMixin_writeMap_closure, A.NoSuchMethodError_toString_closure, A.optimizedRanges_closure, A.optimizedRanges_closure0, A.XmlEventParser_processing_closure]);
     _inherit(A.NullError, A.TypeError);
     _inheritMany(A.TearOffClosure, [A.StaticClosure, A.BoundClosure]);
@@ -21332,7 +21812,7 @@
     typeUniverse: {eC: new Map(), tR: {}, eT: {}, tPV: {}, sEA: []},
     mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List", Object: "Object", Map: "Map", JSObject: "JSObject"},
     mangledNames: {},
-    types: ["~()", "Parser<String>()", "~(MouseEvent)", "bool(Location)", "Parser<+(String,XmlAttributeType)>()", "Parser<@>()", "~(Object?,Object?)", "String(Match)", "bool(String)", "~(~())", "Failure(Failure,Failure)", "Parser<DtdExternalId>()", "int(String?)", "~(Event)", "XmlAttribute(XmlAttribute)", "Map<String,@>(ComObjectInstanceRef)", "Map<String,@>(KnxDeviceRef)", "~(Object?)", "Null()", "bool(GroupAddress)", "Map<String,@>(DatapointType)", "String(Location)", "DeviceInstance(XmlElement)", "Map<String,@>(DeviceInstance)", "String(int)", "XmlNode(XmlNode)", "bool(XmlHasName)", "@(@)", "DeviceInstance(DeviceInstance)", "Null(@)", "+(String,XmlAttributeType)(String,String,String)", "@()", "~(ProgressEvent)", "bool(_DeviceEntry)", "Map<String,@>(KnxDeviceToolKey)", "Map<String,@>(KnxLine)", "Map<String,@>(KnxDevice)", "Map<String,@>(KnxGroupAddress)", "Map<String,@>(KnxGroupRange)", "~(int,@)", "Null(Object,StackTrace)", "Map<String,@>(KnxGaSecureKey)", "~(String,@)", "Map<String,@>(Installation)", "Null(~())", "~(Symbol0,@)", "@(@,String)", "KnxBuilding(Location)", "@(String)", "KnxFloor(Location)", "KnxRoom(Location)", "bool(Node)", "KnxDeviceRef(String)", "KnxDevice(_DeviceEntry)", "List<KnxDeviceRef>()", "bool(KnxDeviceRef)", "KnxGroupAddress(GroupAddress)", "KnxGroupRange(GroupRange)", "KnxGaSecureKey(GroupAddress)", "KnxDeviceToolKey(_DeviceEntry)", "String?(XmlElement)", "bool(String?)", "Map<String,@>(Area)", "Area(Area)", "Line(XmlElement)", "Map<String,@>(Line)", "Line(Line)", "Segment(XmlElement)", "Element(Node)", "List<DeviceInstance>(Segment)", "Map<String,@>(Segment)", "~(Element)", "~(@)", "Segment(Segment)", "Installation(XmlElement)", "DatapointType(XmlElement)", "Installation(Installation)", "List<RangeCharPredicate>(String)", "RangeCharPredicate(String)", "RangeCharPredicate(String,String,String)", "Map<String,@>(DatapointSubtype)", "RangeCharPredicate(int)", "int(RangeCharPredicate,RangeCharPredicate)", "int(int,RangeCharPredicate)", "ComObjectInstanceRef(XmlElement)", "Null(@,StackTrace)", "Area(XmlElement)", "XmlAttribute(XmlEventAttribute)", "Parser<XmlEvent>()", "Parser<XmlTextEvent>()", "Parser<XmlStartElementEvent>()", "Parser<List<XmlEventAttribute>>()", "Parser<XmlEventAttribute>()", "~(XmlElement{parent:GroupRange?})", "Parser<XmlEndElementEvent>()", "Parser<XmlCommentEvent>()", "Parser<XmlCDATAEvent>()", "Parser<XmlDeclarationEvent>()", "Parser<XmlProcessingEvent>()", "Parser<XmlDoctypeEvent>()", "~(XmlElement{parentLocation:Location?})", "Map<String,@>(GroupAddress)", "Map<String,@>(GroupRange)", "XmlRawTextEvent(String)", "XmlStartElementEvent(String,String,List<XmlEventAttribute>,String,String)", "XmlEventAttribute(String,String,+(String,XmlAttributeType))", "+(String,XmlAttributeType)(String,String,String,+(String,XmlAttributeType))", "Map<String,@>(Location)", "+(String,XmlAttributeType)(String)", "XmlEndElementEvent(String,String,String,String)", "XmlCommentEvent(String,String,String)", "XmlCDATAEvent(String,String,String)", "XmlDeclarationEvent(String,List<XmlEventAttribute>,String,String)", "String(String,String)", "XmlProcessingEvent(String,String,String,String)", "XmlDoctypeEvent(String,String,String,DtdExternalId?,String,String?,String,String)", "DtdExternalId(String,String,+(String,XmlAttributeType))", "DtdExternalId(String,String,+(String,XmlAttributeType),String,+(String,XmlAttributeType))", "String(String,String,String)", "Parser<XmlEvent>(XmlEntityMapping)", "~(XmlEvent)", "Map<String,@>(KnxBuilding)", "Future<~>(MouseEvent)", "Map<String,@>(KnxFloor)", "int(@,@)", "Map<String,@>(KnxRoom)", "Map<String,@>(KnxArea)", "DatapointSubtype(XmlElement)"],
+    types: ["~()", "Parser<String>()", "~(MouseEvent)", "bool(Location)", "Parser<+(String,XmlAttributeType)>()", "Parser<@>()", "bool(String)", "DeviceInstance(DeviceInstance)", "Parser<DtdExternalId>()", "String(Match)", "~(~())", "Failure(Failure,Failure)", "~(Object?,Object?)", "XmlAttribute(XmlAttribute)", "Map<String,@>(ComObjectInstanceRef)", "Map<String,@>(DatapointType)", "~(Object?)", "Null()", "bool(GroupAddress)", "bool(_DeviceEntry)", "String(Location)", "Map<String,@>(KnxDeviceRef)", "Area(Area)", "Line(Line)", "DeviceInstance(XmlElement)", "Map<String,@>(DeviceInstance)", "@(@)", "Installation(Installation)", "String(int)", "XmlNode(XmlNode)", "bool(XmlHasName)", "Segment(Segment)", "Null(@)", "int(String?)", "+(String,XmlAttributeType)(String,String,String)", "~(Event)", "~(ProgressEvent)", "@()", "Map<String,@>(Installation)", "~(int,@)", "Null(Object,StackTrace)", "Map<String,@>(KnxGaSecureKey)", "Map<String,@>(KnxDeviceToolKey)", "~(String,@)", "Null(~())", "~(Symbol0,@)", "@(@,String)", "KnxBuilding(Location)", "@(String)", "KnxFloor(Location)", "KnxRoom(Location)", "bool(Node)", "KnxDeviceRef(String)", "KnxDevice(_DeviceEntry)", "List<KnxDeviceRef>()", "bool(KnxDeviceRef)", "KnxGroupAddress(GroupAddress)", "KnxGroupRange(GroupRange)", "KnxGaSecureKey(GroupAddress)", "KnxDeviceToolKey(_DeviceEntry)", "String?(XmlElement)", "bool(String?)", "Map<String,@>(Area)", "Element(Node)", "Line(XmlElement)", "Map<String,@>(Line)", "~(Element)", "Segment(XmlElement)", "~(@)", "List<DeviceInstance>(Segment)", "Map<String,@>(Segment)", "Map<String,@>(DatapointSubtype)", "ComObjectInstanceRef(XmlElement)", "Null(@,StackTrace)", "Installation(XmlElement)", "DatapointType(XmlElement)", "Area(XmlElement)", "ComObjectInstanceRef(ComObjectInstanceRef)", "List<RangeCharPredicate>(String)", "RangeCharPredicate(String)", "RangeCharPredicate(String,String,String)", "~(XmlElement{parent:GroupRange?})", "RangeCharPredicate(int)", "int(RangeCharPredicate,RangeCharPredicate)", "int(int,RangeCharPredicate)", "~(XmlElement{parentLocation:Location?})", "Map<String,@>(GroupAddress)", "Map<String,@>(GroupRange)", "XmlAttribute(XmlEventAttribute)", "Parser<XmlEvent>()", "Parser<XmlTextEvent>()", "Parser<XmlStartElementEvent>()", "Parser<List<XmlEventAttribute>>()", "Parser<XmlEventAttribute>()", "Map<String,@>(Location)", "Parser<XmlEndElementEvent>()", "Parser<XmlCommentEvent>()", "Parser<XmlCDATAEvent>()", "Parser<XmlDeclarationEvent>()", "Parser<XmlProcessingEvent>()", "Parser<XmlDoctypeEvent>()", "Map<String,@>(KnxBuilding)", "Map<String,@>(KnxFloor)", "Map<String,@>(KnxRoom)", "XmlRawTextEvent(String)", "XmlStartElementEvent(String,String,List<XmlEventAttribute>,String,String)", "XmlEventAttribute(String,String,+(String,XmlAttributeType))", "+(String,XmlAttributeType)(String,String,String,+(String,XmlAttributeType))", "Map<String,@>(KnxArea)", "+(String,XmlAttributeType)(String)", "XmlEndElementEvent(String,String,String,String)", "XmlCommentEvent(String,String,String)", "XmlCDATAEvent(String,String,String)", "XmlDeclarationEvent(String,List<XmlEventAttribute>,String,String)", "String(String,String)", "XmlProcessingEvent(String,String,String,String)", "XmlDoctypeEvent(String,String,String,DtdExternalId?,String,String?,String,String)", "DtdExternalId(String,String,+(String,XmlAttributeType))", "DtdExternalId(String,String,+(String,XmlAttributeType),String,+(String,XmlAttributeType))", "String(String,String,String)", "Parser<XmlEvent>(XmlEntityMapping)", "~(XmlEvent)", "Map<String,@>(KnxLine)", "Future<~>(MouseEvent)", "Map<String,@>(KnxDevice)", "int(@,@)", "Map<String,@>(KnxGroupAddress)", "Map<String,@>(KnxGroupRange)", "DatapointSubtype(XmlElement)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: Symbol("$ti"),
@@ -21463,6 +21943,7 @@
       Map_String_String: findType("Map<String,String>"),
       Map_String_dynamic: findType("Map<String,@>"),
       Map_dynamic_dynamic: findType("Map<@,@>"),
+      Map_of_String_and_Map_String_String: findType("Map<String,Map<String,String>>"),
       MappedIterable_GroupAddress_KnxGaSecureKey: findType("MappedIterable<GroupAddress,KnxGaSecureKey>"),
       MappedIterable_Location_KnxBuilding: findType("MappedIterable<Location,KnxBuilding>"),
       MappedIterable_Location_KnxFloor: findType("MappedIterable<Location,KnxFloor>"),
@@ -21528,6 +22009,7 @@
       UnknownJavaScriptObject: findType("UnknownJavaScriptObject"),
       WhereIterable_GroupAddress: findType("WhereIterable<GroupAddress>"),
       WhereIterable_Location: findType("WhereIterable<Location>"),
+      WhereIterable_String: findType("WhereIterable<String>"),
       WhereIterable__DeviceEntry: findType("WhereIterable<_DeviceEntry>"),
       WhereIterator_Location: findType("WhereIterator<Location>"),
       WhereTypeIterable_XmlDeclarationEvent: findType("WhereTypeIterable<XmlDeclarationEvent>"),
@@ -21560,6 +22042,7 @@
       bool_Function_GroupAddress: findType("bool(GroupAddress)"),
       bool_Function_Location: findType("bool(Location)"),
       bool_Function_Object: findType("bool(Object)"),
+      bool_Function_String: findType("bool(String)"),
       bool_Function__DeviceEntry: findType("bool(_DeviceEntry)"),
       double: findType("double"),
       dynamic: findType("@"),
@@ -21570,6 +22053,7 @@
       nullable_DtdExternalId: findType("DtdExternalId?"),
       nullable_Future_Null: findType("Future<Null>?"),
       nullable_JSObject: findType("JSObject?"),
+      nullable_List_String: findType("List<String>?"),
       nullable_Object: findType("Object?"),
       nullable_String: findType("String?"),
       nullable_String_Function_Match: findType("String(Match)?"),
@@ -21763,10 +22247,11 @@
     B.List_TrJ = makeConstList([99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22], type$.JSArray_int);
     B.List_YE8 = makeConstList([619, 720, 127, 481, 931, 816, 813, 233, 566, 247, 985, 724, 205, 454, 863, 491, 741, 242, 949, 214, 733, 859, 335, 708, 621, 574, 73, 654, 730, 472, 419, 436, 278, 496, 867, 210, 399, 680, 480, 51, 878, 465, 811, 169, 869, 675, 611, 697, 867, 561, 862, 687, 507, 283, 482, 129, 807, 591, 733, 623, 150, 238, 59, 379, 684, 877, 625, 169, 643, 105, 170, 607, 520, 932, 727, 476, 693, 425, 174, 647, 73, 122, 335, 530, 442, 853, 695, 249, 445, 515, 909, 545, 703, 919, 874, 474, 882, 500, 594, 612, 641, 801, 220, 162, 819, 984, 589, 513, 495, 799, 161, 604, 958, 533, 221, 400, 386, 867, 600, 782, 382, 596, 414, 171, 516, 375, 682, 485, 911, 276, 98, 553, 163, 354, 666, 933, 424, 341, 533, 870, 227, 730, 475, 186, 263, 647, 537, 686, 600, 224, 469, 68, 770, 919, 190, 373, 294, 822, 808, 206, 184, 943, 795, 384, 383, 461, 404, 758, 839, 887, 715, 67, 618, 276, 204, 918, 873, 777, 604, 560, 951, 160, 578, 722, 79, 804, 96, 409, 713, 940, 652, 934, 970, 447, 318, 353, 859, 672, 112, 785, 645, 863, 803, 350, 139, 93, 354, 99, 820, 908, 609, 772, 154, 274, 580, 184, 79, 626, 630, 742, 653, 282, 762, 623, 680, 81, 927, 626, 789, 125, 411, 521, 938, 300, 821, 78, 343, 175, 128, 250, 170, 774, 972, 275, 999, 639, 495, 78, 352, 126, 857, 956, 358, 619, 580, 124, 737, 594, 701, 612, 669, 112, 134, 694, 363, 992, 809, 743, 168, 974, 944, 375, 748, 52, 600, 747, 642, 182, 862, 81, 344, 805, 988, 739, 511, 655, 814, 334, 249, 515, 897, 955, 664, 981, 649, 113, 974, 459, 893, 228, 433, 837, 553, 268, 926, 240, 102, 654, 459, 51, 686, 754, 806, 760, 493, 403, 415, 394, 687, 700, 946, 670, 656, 610, 738, 392, 760, 799, 887, 653, 978, 321, 576, 617, 626, 502, 894, 679, 243, 440, 680, 879, 194, 572, 640, 724, 926, 56, 204, 700, 707, 151, 457, 449, 797, 195, 791, 558, 945, 679, 297, 59, 87, 824, 713, 663, 412, 693, 342, 606, 134, 108, 571, 364, 631, 212, 174, 643, 304, 329, 343, 97, 430, 751, 497, 314, 983, 374, 822, 928, 140, 206, 73, 263, 980, 736, 876, 478, 430, 305, 170, 514, 364, 692, 829, 82, 855, 953, 676, 246, 369, 970, 294, 750, 807, 827, 150, 790, 288, 923, 804, 378, 215, 828, 592, 281, 565, 555, 710, 82, 896, 831, 547, 261, 524, 462, 293, 465, 502, 56, 661, 821, 976, 991, 658, 869, 905, 758, 745, 193, 768, 550, 608, 933, 378, 286, 215, 979, 792, 961, 61, 688, 793, 644, 986, 403, 106, 366, 905, 644, 372, 567, 466, 434, 645, 210, 389, 550, 919, 135, 780, 773, 635, 389, 707, 100, 626, 958, 165, 504, 920, 176, 193, 713, 857, 265, 203, 50, 668, 108, 645, 990, 626, 197, 510, 357, 358, 850, 858, 364, 936, 638], type$.JSArray_int);
     B.List_dF0 = makeConstList([2774754246, 2222750968, 2574743534, 2373680118, 234025727, 3177933782, 2976870366, 1422247313, 1345335392, 50397442, 2842126286, 2099981142, 436141799, 1658312629, 3870010189, 2591454956, 1170918031, 2642575903, 1086966153, 2273148410, 368769775, 3948501426, 3376891790, 200339707, 3970805057, 1742001331, 4255294047, 3937382213, 3214711843, 4154762323, 2524082916, 1539358875, 3266819957, 486407649, 2928907069, 1780885068, 1513502316, 1094664062, 49805301, 1338821763, 1546925160, 4104496465, 887481809, 150073849, 2473685474, 1943591083, 1395732834, 1058346282, 201589768, 1388824469, 1696801606, 1589887901, 672667696, 2711000631, 251987210, 3046808111, 151455502, 907153956, 2608889883, 1038279391, 652995533, 1764173646, 3451040383, 2675275242, 453576978, 2659418909, 1949051992, 773462580, 756751158, 2993581788, 3998898868, 4221608027, 4132590244, 1295727478, 1641469623, 3467883389, 2066295122, 1055122397, 1898917726, 2542044179, 4115878822, 1758581177, 0, 753790401, 1612718144, 536673507, 3367088505, 3982187446, 3194645204, 1187761037, 3653156455, 1262041458, 3729410708, 3561770136, 3898103984, 1255133061, 1808847035, 720367557, 3853167183, 385612781, 3309519750, 3612167578, 1429418854, 2491778321, 3477423498, 284817897, 100794884, 2172616702, 4031795360, 1144798328, 3131023141, 3819481163, 4082192802, 4272137053, 3225436288, 2324664069, 2912064063, 3164445985, 1211644016, 83228145, 3753688163, 3249976951, 1977277103, 1663115586, 806359072, 452984805, 250868733, 1842533055, 1288555905, 336333848, 890442534, 804056259, 3781124030, 2727843637, 3427026056, 957814574, 1472513171, 4071073621, 2189328124, 1195195770, 2892260552, 3881655738, 723065138, 2507371494, 2690670784, 2558624025, 3511635870, 2145180835, 1713513028, 2116692564, 2878378043, 2206763019, 3393603212, 703524551, 3552098411, 1007948840, 2044649127, 3797835452, 487262998, 1994120109, 1004593371, 1446130276, 1312438900, 503974420, 3679013266, 168166924, 1814307912, 3831258296, 1573044895, 1859376061, 4021070915, 2791465668, 2828112185, 2761266481, 937747667, 2339994098, 854058965, 1137232011, 1496790894, 3077402074, 2358086913, 1691735473, 3528347292, 3769215305, 3027004632, 4199962284, 133494003, 636152527, 2942657994, 2390391540, 3920539207, 403179536, 3585784431, 2289596656, 1864705354, 1915629148, 605822008, 4054230615, 3350508659, 1371981463, 602466507, 2094914977, 2624877800, 555687742, 3712699286, 3703422305, 2257292045, 2240449039, 2423288032, 1111375484, 3300242801, 2858837708, 3628615824, 84083462, 32962295, 302911004, 2741068226, 1597322602, 4183250862, 3501832553, 2441512471, 1489093017, 656219450, 3114180135, 954327513, 335083755, 3013122091, 856756514, 3144247762, 1893325225, 2307821063, 2811532339, 3063651117, 572399164, 2458355477, 552200649, 1238290055, 4283782570, 2015897680, 2061492133, 2408352771, 4171342169, 2156497161, 386731290, 3669999461, 837215959, 3326231172, 3093850320, 3275833730, 2962856233, 1999449434, 286199582, 3417354363, 4233385128, 3602627437, 974525996], type$.JSArray_int);
-    B.List_empty4 = makeConstList([], A.findType("JSArray<DeviceKey>"));
-    B.List_empty3 = makeConstList([], A.findType("JSArray<GroupKey>"));
-    B.List_empty5 = makeConstList([], type$.JSArray_KnxDeviceRef);
+    B.List_empty5 = makeConstList([], A.findType("JSArray<DeviceKey>"));
+    B.List_empty4 = makeConstList([], A.findType("JSArray<GroupKey>"));
+    B.List_empty6 = makeConstList([], type$.JSArray_KnxDeviceRef);
     B.List_empty2 = makeConstList([], type$.JSArray_Parser_dynamic);
+    B.List_empty3 = makeConstList([], type$.JSArray_String);
     B.List_empty = makeConstList([], A.findType("JSArray<XmlAttribute>"));
     B.List_empty0 = makeConstList([], type$.JSArray_XmlNode);
     B.List_empty1 = makeConstList([], type$.JSArray_dynamic);
@@ -21797,8 +22282,8 @@
     B.Set_kiQsn = new A.GeneralConstantSet([B.XmlNodeType_1, B.XmlNodeType_2, B.XmlNodeType_7, B.XmlNodeType_10, B.XmlNodeType_11], type$.GeneralConstantSet_XmlNodeType);
     B.Symbol__throwNoParent = new A.Symbol("_throwNoParent");
     B.Symbol_call = new A.Symbol("call");
-    B.List_empty6 = makeConstList([], A.findType("JSArray<Area>"));
-    B.Topology_List_empty = new A.Topology(B.List_empty6);
+    B.List_empty7 = makeConstList([], A.findType("JSArray<Area>"));
+    B.Topology_List_empty = new A.Topology(B.List_empty7);
     B.Type_ByteBuffer_rqD = A.typeLiteral("ByteBuffer");
     B.Type_ByteData_9dB = A.typeLiteral("ByteData");
     B.Type_Int32List_O8Z = A.typeLiteral("Int32List");
