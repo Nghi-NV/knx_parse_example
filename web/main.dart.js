@@ -4210,11 +4210,6 @@
       t1._collection$_cell = _set._collection$_first;
       return t1;
     },
-    LinkedHashMap_LinkedHashMap$of(other, $K, $V) {
-      var t1 = A.LinkedHashMap_LinkedHashMap($K, $V);
-      t1.addAll$1(0, other);
-      return t1;
-    },
     MapBase_mapToString(m) {
       var result, t1;
       if (A.isToStringVisiting(m))
@@ -17741,6 +17736,23 @@
       } catch (exception) {
       }
     },
+    _mergeComObjectAttrs$2(baseAttrs, refAttrs) {
+      var t2, t3, value,
+        t1 = type$.Map_String_String;
+      t1._as(baseAttrs);
+      t1._as(refAttrs);
+      t1 = type$.String;
+      t1 = A.LinkedHashMap_LinkedHashMap(t1, t1);
+      t1.addAll$1(0, baseAttrs);
+      for (t2 = refAttrs.get$entries(refAttrs), t2 = t2.get$iterator(t2); t2.moveNext$0();) {
+        t3 = t2.get$current();
+        value = t3.value;
+        if (A.stringContainsUnchecked(value, "{{", 0))
+          continue;
+        t1.$indexSet(0, t3.key, value);
+      }
+      return t1;
+    },
     _lookupComObjectDef$4(instanceRefId, appProgramPrefix, comObjectDefs, comObjectRefMap) {
       var refAttrs, comObjectId, baseAttrs, t2, entry,
         _s12_ = "_comObjectId",
@@ -17751,12 +17763,8 @@
       if (refAttrs != null) {
         comObjectId = refAttrs.$index(0, _s12_);
         baseAttrs = comObjectId != null ? comObjectDefs.$index(0, comObjectId) : null;
-        if (baseAttrs != null) {
-          t1 = type$.String;
-          t1 = A.LinkedHashMap_LinkedHashMap$of(baseAttrs, t1, t1);
-          t1.addAll$1(0, refAttrs);
-          return t1;
-        }
+        if (baseAttrs != null)
+          return this._mergeComObjectAttrs$2(baseAttrs, refAttrs);
         return refAttrs;
       }
       for (t1 = new A.LinkedHashMapEntriesIterable(comObjectRefMap, A._instanceType(comObjectRefMap)._eval$1("LinkedHashMapEntriesIterable<1,2>")).get$iterator(0), t2 = "_" + instanceRefId; t1.moveNext$0();) {
@@ -17765,13 +17773,8 @@
           t1 = entry.value;
           comObjectId = t1.$index(0, _s12_);
           baseAttrs = comObjectId != null ? comObjectDefs.$index(0, comObjectId) : null;
-          if (baseAttrs != null) {
-            t2 = type$.String;
-            t2 = A.LinkedHashMap_LinkedHashMap(t2, t2);
-            t2.addAll$1(0, baseAttrs);
-            t2.addAll$1(0, t1);
-            return t2;
-          }
+          if (baseAttrs != null)
+            return this._mergeComObjectAttrs$2(baseAttrs, t1);
           return t1;
         }
       }
@@ -18004,7 +18007,7 @@
         t4 = _this.comObjectRefMap;
         t5 = A._instanceType(t4)._eval$1("LinkedHashMapEntryIterator<1,2>");
         t6 = _this.comObjectDefs;
-        t7 = type$.String;
+        t7 = _this.$this;
         _i = 0;
         for (; _i < t2.length; t2.length === t3 || (0, A.throwConcurrentModificationError)(t2), ++_i) {
           suffix = t2[_i];
@@ -18014,12 +18017,8 @@
               def = entry.value;
               comObjId = def.$index(0, "_comObjectId");
               baseDef = comObjId != null ? t6.$index(0, comObjId) : _null;
-              if (baseDef != null) {
-                t8 = A.LinkedHashMap_LinkedHashMap(t7, t7);
-                t8.addAll$1(0, baseDef);
-                t8.addAll$1(0, def);
-                def = t8;
-              }
+              if (baseDef != null)
+                def = t7._mergeComObjectAttrs$2(baseDef, def);
               break;
             }
           }

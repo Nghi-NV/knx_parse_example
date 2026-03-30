@@ -244,11 +244,12 @@ packages:
   knx_parser:
     dependency: "direct main"
     description:
-      name: knx_parser
-      sha256: "9428d9d68642334e4cf09938119142b515edf5f3c6d5e55abab1326fab528c6c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.11.1"
+      path: "."
+      ref: main
+      resolved-ref: "0eb952e2ea8f20faf9a1038ad385e00ee519efe8"
+      url: "https://github.com/Nghi-NV/knx_parser.git"
+    source: git
+    version: "1.11.2"
   logging:
     dependency: transitive
     description:
