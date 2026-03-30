@@ -6173,13 +6173,14 @@
       _.comObjectRefMap = t2;
       _.installations = t3;
     },
-    KnxProjectParser__enrichDeviceComObjects_closure: function KnxProjectParser__enrichDeviceComObjects_closure(t0, t1, t2, t3, t4) {
+    KnxProjectParser__enrichDeviceComObjects_closure: function KnxProjectParser__enrichDeviceComObjects_closure(t0, t1, t2, t3, t4, t5) {
       var _ = this;
       _.$this = t0;
-      _.comObjectDefs = t1;
-      _.mfgPrefix = t2;
+      _.appProgramPrefix = t1;
+      _.comObjectDefs = t2;
       _.comObjectRefMap = t3;
-      _.installations = t4;
+      _.mfgPrefix = t4;
+      _.installations = t5;
     },
     Context: function Context(t0, t1) {
       this.buffer = t0;
@@ -17819,7 +17820,7 @@
       return t1;
     },
     _enrichDeviceComObjects$4(device, comObjectDefs, comObjectRefMap, installations) {
-      var h2pRefId, h2pRefId0, mfgMatch, mfgPrefix, t2, t3, enrichedComObjects,
+      var h2pRefId, h2pRefId0, mfgMatch, mfgPrefix, hpMatch, appProgramPrefix, t2, t3, enrichedComObjects,
         t1 = type$.Map_of_String_and_Map_String_String;
       t1._as(comObjectDefs);
       t1._as(comObjectRefMap);
@@ -17838,10 +17839,18 @@
       }
       if (mfgPrefix == null)
         mfgPrefix = "";
+      hpMatch = A.RegExp_RegExp("HP-(.+)$").firstMatch$1(h2pRefId0);
+      if (hpMatch != null) {
+        t1 = hpMatch._match;
+        if (1 >= t1.length)
+          return A.ioore(t1, 1);
+        appProgramPrefix = mfgPrefix + "_A-" + A.S(t1[1]);
+      } else
+        appProgramPrefix = null;
       t1 = device.comObjectInstanceRefs;
       t2 = A._arrayInstanceType(t1);
       t3 = t2._eval$1("MappedListIterable<1,ComObjectInstanceRef>");
-      enrichedComObjects = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("ComObjectInstanceRef(1)")._as(new A.KnxProjectParser__enrichDeviceComObjects_closure(this, comObjectDefs, mfgPrefix, comObjectRefMap, installations)), t3), t3._eval$1("ListIterable.E"));
+      enrichedComObjects = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("ComObjectInstanceRef(1)")._as(new A.KnxProjectParser__enrichDeviceComObjects_closure(this, appProgramPrefix, comObjectDefs, comObjectRefMap, mfgPrefix, installations)), t3), t3._eval$1("ListIterable.E"));
       return new A.DeviceInstance(device.id, device.address, device.name, device.description, device.comment, device.productName, device.productRefId, h2pRefId, device.puid, enrichedComObjects, device.securityToolKey);
     }
   };
@@ -17951,52 +17960,65 @@
   };
   A.KnxProjectParser__enrichDeviceComObjects_closure.prototype = {
     call$1(co) {
-      var t1, t2, strippedRefId, t3, t4, t5, t6, t7, def, t8, appMatch, _i, suffix, t9, t10, entry, comObjId, baseDef, resolvedGAs, t11, t12, t13, _this = this, _null = null;
+      var t1, t2, strippedRefId, t3, t4, t5, def, t6, t7, t8, appMatch, _i, suffix, t9, entry, comObjId, baseDef, resolvedGAs, t10, t11, t12, t13, _this = this, _null = null;
       type$.ComObjectInstanceRef._as(co);
       t1 = co.refId;
       if (t1 == null)
         return co;
       t2 = A.RegExp_RegExp("_M-\\d+_MI-\\d+");
       strippedRefId = A.stringReplaceAllUnchecked(t1, t2, "");
-      for (t2 = _this.comObjectDefs, t3 = new A.LinkedHashMapKeyIterator(t2, t2._modifications, t2._first, A._instanceType(t2)._eval$1("LinkedHashMapKeyIterator<1>")), t4 = _this.mfgPrefix, t5 = _this.$this, t6 = _this.comObjectRefMap, t7 = strippedRefId !== t1, def = _null; t3.moveNext$0();) {
-        t8 = t3.__js_helper$_current;
-        if (B.JSString_methods.startsWith$1(t8, t4)) {
-          appMatch = A.RegExp_RegExp("^(M-[^_]+_A-[^_]+)").firstMatch$1(t8);
-          if (appMatch != null) {
-            t8 = appMatch._match;
-            if (1 >= t8.length)
-              return A.ioore(t8, 1);
-            t8 = t8[1];
-            t8.toString;
-            def = t5._lookupComObjectDef$4(t1, t8, t2, t6);
-            if (def == null && t7)
-              def = t5._lookupComObjectDef$4(strippedRefId, t8, t2, t6);
-            if (def != null)
-              break;
+      t2 = _this.appProgramPrefix;
+      if (t2 != null) {
+        t3 = _this.$this;
+        t4 = _this.comObjectDefs;
+        t5 = _this.comObjectRefMap;
+        def = t3._lookupComObjectDef$4(t1, t2, t4, t5);
+        if (def == null && strippedRefId !== t1)
+          def = t3._lookupComObjectDef$4(strippedRefId, t2, t4, t5);
+      } else
+        def = _null;
+      if (def == null)
+        for (t2 = _this.comObjectDefs, t3 = new A.LinkedHashMapKeyIterator(t2, t2._modifications, t2._first, A._instanceType(t2)._eval$1("LinkedHashMapKeyIterator<1>")), t4 = _this.mfgPrefix, t5 = _this.$this, t6 = _this.comObjectRefMap, t7 = strippedRefId !== t1; t3.moveNext$0();) {
+          t8 = t3.__js_helper$_current;
+          if (B.JSString_methods.startsWith$1(t8, t4)) {
+            appMatch = A.RegExp_RegExp("^(M-[^_]+_A-[^_]+)").firstMatch$1(t8);
+            if (appMatch != null) {
+              t8 = appMatch._match;
+              if (1 >= t8.length)
+                return A.ioore(t8, 1);
+              t8 = t8[1];
+              t8.toString;
+              def = t5._lookupComObjectDef$4(t1, t8, t2, t6);
+              if (def == null && t7)
+                def = t5._lookupComObjectDef$4(strippedRefId, t8, t2, t6);
+              if (def != null)
+                break;
+            }
           }
         }
-      }
       if (def == null) {
-        t3 = A._setArrayType([t1], type$.JSArray_String);
-        if (t7)
-          t3.push(strippedRefId);
-        t4 = t3.length;
-        t7 = A._instanceType(t6)._eval$1("LinkedHashMapEntryIterator<1,2>");
-        t8 = type$.String;
+        t2 = A._setArrayType([t1], type$.JSArray_String);
+        if (strippedRefId !== t1)
+          t2.push(strippedRefId);
+        t3 = t2.length;
+        t4 = _this.comObjectRefMap;
+        t5 = A._instanceType(t4)._eval$1("LinkedHashMapEntryIterator<1,2>");
+        t6 = _this.comObjectDefs;
+        t7 = type$.String;
         _i = 0;
-        for (; _i < t3.length; t3.length === t4 || (0, A.throwConcurrentModificationError)(t3), ++_i) {
-          suffix = t3[_i];
-          for (t9 = new A.LinkedHashMapEntryIterator(t6, t6._modifications, t6._first, t7), t10 = "_" + suffix; t9.moveNext$0();) {
-            entry = t9.__js_helper$_current;
-            if (B.JSString_methods.endsWith$1(entry.key, t10)) {
+        for (; _i < t2.length; t2.length === t3 || (0, A.throwConcurrentModificationError)(t2), ++_i) {
+          suffix = t2[_i];
+          for (t8 = new A.LinkedHashMapEntryIterator(t4, t4._modifications, t4._first, t5), t9 = "_" + suffix; t8.moveNext$0();) {
+            entry = t8.__js_helper$_current;
+            if (B.JSString_methods.endsWith$1(entry.key, t9)) {
               def = entry.value;
               comObjId = def.$index(0, "_comObjectId");
-              baseDef = comObjId != null ? t2.$index(0, comObjId) : _null;
+              baseDef = comObjId != null ? t6.$index(0, comObjId) : _null;
               if (baseDef != null) {
-                t9 = A.LinkedHashMap_LinkedHashMap(t8, t8);
-                t9.addAll$1(0, baseDef);
-                t9.addAll$1(0, def);
-                def = t9;
+                t8 = A.LinkedHashMap_LinkedHashMap(t7, t7);
+                t8.addAll$1(0, baseDef);
+                t8.addAll$1(0, def);
+                def = t8;
               }
               break;
             }
@@ -18005,27 +18027,28 @@
             break;
         }
       }
-      t2 = co.links;
-      resolvedGAs = t5._resolveGaLinks$2(t2, _this.installations);
-      t3 = def == null;
-      if (t3 && resolvedGAs.length === 0)
+      t2 = _this.$this;
+      t3 = co.links;
+      resolvedGAs = t2._resolveGaLinks$2(t3, _this.installations);
+      t4 = def == null;
+      if (t4 && resolvedGAs.length === 0)
         return co;
-      t4 = t3 ? _null : def.$index(0, "Name");
-      t6 = t3 ? _null : def.$index(0, "Text");
-      t7 = t3 ? _null : def.$index(0, "Number");
+      t5 = t4 ? _null : def.$index(0, "Name");
+      t6 = t4 ? _null : def.$index(0, "Text");
+      t7 = t4 ? _null : def.$index(0, "Number");
       t7 = A.Primitives_parseInt(t7 == null ? "" : t7, _null);
-      t8 = t3 ? _null : def.$index(0, "FunctionText");
-      t9 = t3 ? _null : def.$index(0, "ObjectSize");
-      t10 = t3 ? _null : def.$index(0, "DatapointType");
-      t3 = !t3;
-      t11 = t3 ? t5._flagValue$1(def.$index(0, "ReadFlag")) : _null;
-      t12 = t3 ? t5._flagValue$1(def.$index(0, "WriteFlag")) : _null;
-      t13 = t3 ? t5._flagValue$1(def.$index(0, "TransmitFlag")) : _null;
-      t3 = t3 ? t5._flagValue$1(def.$index(0, "UpdateFlag")) : _null;
-      t5 = resolvedGAs.length !== 0 ? resolvedGAs : _null;
-      type$.nullable_List_String._as(t5);
-      if (t4 == null)
-        t4 = co.name;
+      t8 = t4 ? _null : def.$index(0, "FunctionText");
+      t9 = t4 ? _null : def.$index(0, "ObjectSize");
+      t10 = t4 ? _null : def.$index(0, "DatapointType");
+      t4 = !t4;
+      t11 = t4 ? t2._flagValue$1(def.$index(0, "ReadFlag")) : _null;
+      t12 = t4 ? t2._flagValue$1(def.$index(0, "WriteFlag")) : _null;
+      t13 = t4 ? t2._flagValue$1(def.$index(0, "TransmitFlag")) : _null;
+      t2 = t4 ? t2._flagValue$1(def.$index(0, "UpdateFlag")) : _null;
+      t4 = resolvedGAs.length !== 0 ? resolvedGAs : _null;
+      type$.nullable_List_String._as(t4);
+      if (t5 == null)
+        t5 = co.name;
       if (t6 == null)
         t6 = co.description;
       if (t7 == null)
@@ -18042,11 +18065,11 @@
         t12 = co.writeFlag;
       if (t13 == null)
         t13 = co.transmitFlag;
-      if (t3 == null)
-        t3 = co.updateFlag;
-      if (t5 == null)
-        t5 = co.groupAddresses;
-      return new A.ComObjectInstanceRef(t1, co.text, t2, co.channelId, t4, t6, t7, t8, t9, t10, t11, t12, t13, t3, t5);
+      if (t2 == null)
+        t2 = co.updateFlag;
+      if (t4 == null)
+        t4 = co.groupAddresses;
+      return new A.ComObjectInstanceRef(t1, co.text, t3, co.channelId, t5, t6, t7, t8, t9, t10, t11, t12, t13, t2, t4);
     },
     $signature: 77
   };
