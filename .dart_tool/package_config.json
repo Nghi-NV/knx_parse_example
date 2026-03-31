@@ -183,7 +183,7 @@
     },
     {
       "name": "knx_parser",
-      "rootUri": "../../knx_parse",
+      "rootUri": "file:///Users/nghinguyen/.pub-cache/git/knx_parser-0eb952e2ea8f20faf9a1038ad385e00ee519efe8/",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -381,8 +381,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.10.3",
+  "generatorVersion": "3.11.1",
   "flutterRoot": "file:///Users/nghinguyen/development/flutter",
-  "flutterVersion": "3.38.4",
+  "flutterVersion": "3.41.3",
   "pubCache": "file:///Users/nghinguyen/.pub-cache"
 }
